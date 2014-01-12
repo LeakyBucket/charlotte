@@ -1,3 +1,3 @@
 # Charlotte
 
-** TODO: Add description **
+A Work in Progress
