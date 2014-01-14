@@ -1,8 +1,8 @@
-defmodule Webserver do
+defmodule Charlotte.Webserver do
   def start(options) do
     lc component inlist [:crypto, :public_key, :ssl, :mimetypes, :ranch, :cowlib, :cowboy], do: :application.start component
 
-    router = :cowboy_router.compile([{binary_to_atom(options[:host]), [{'/[...]', Handlers.HTTP, options}]}])
+    router = compile_routes(options)
 
     router |> start_server(options)
   end
@@ -17,6 +17,15 @@ defmodule Webserver do
       :tcp ->
         :cowboy.start_http :http, acceptors, [port], [env: [dispatch: router], compress: compress]
     end
+  end
+
+  # TODO: Make more robust (should handle both http and https)
+  def update_routes(options) do
+    :cowboy.set_env(:http, :dispatch, compile_routes(options))
+  end
+
+  defp compile_routes(options) do
+    :cowboy_router.compile([{options[:host], [{'/[...]', Handlers.HTTP, options}]}])
   end
 
   defp build_start_args(options) do

@@ -3,6 +3,9 @@
   "exjson": {:git, "git://github.com/guedes/exjson.git", "bd9dcb7e78c2344bb491098405f2b81d53979dcd", []},
   "exlager": {:git, "git://github.com/khia/exlager.git", "0b840aae773e6eb6de7cdbb703b47031b6608bfb", []},
   "goldrush": {:git, "git://github.com/DeadZen/goldrush.git", "1d883423ac360b3536ca52dc733a0164bacf3109", [tag: "0.1.5"]},
+  "hackney": {:git, "git://github.com/benoitc/hackney.git", "12b267d82684da8199325fcd95ad685e7db7abc4", []},
+  "hackney_lib": {:git, "https://github.com/benoitc/hackney_lib.git", "eecdb481f1d38bfb194896bffdf9bdcdd967ae96", [tag: "0.2.2"]},
   "lager": {:git, "https://github.com/basho/lager.git", "555e437217925244f8f5af75fc0ba44f7053b798", []},
+  "mimetypes": {:git, "git://github.com/spawngrid/mimetypes.git", "47d37a977a7d633199822bf6b08353007483d00f", [ref: "master"]},
   "plug": {:git, "git://github.com/elixir-lang/plug.git", "9dd2e965e2218eb7ff21b07c8607f4e7faabed92", []},
   "ranch": {:git, "git://github.com/extend/ranch.git", "5df1f222f94e08abdcab7084f5e13027143cc222", [ref: "0.9.0"]} ]
