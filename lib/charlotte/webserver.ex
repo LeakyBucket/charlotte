@@ -25,7 +25,7 @@ defmodule Charlotte.Webserver do
   end
 
   defp compile_routes(options) do
-    :cowboy_router.compile([{options[:host], [{'/[...]', Handlers.HTTP, options}]}])
+    :cowboy_router.compile([{options[:host], [{'/[...]', Charlotte.Controllers.HTTP, options}]}])
   end
 
   defp build_start_args(options) do
