@@ -3,6 +3,7 @@ defmodule Charlotte.Dispatcher do
     controllers = find_files(config[:path]) |> load_controllers
   end
 
+  # Reload all the controller files.
   def load_controllers(files) do
     compiled_mods = fn(file, acc) ->
                       mod_names(Code.load_file(file)) ++ acc
@@ -11,10 +12,13 @@ defmodule Charlotte.Dispatcher do
     Enum.reduce(files, [], compiled_mods)
   end
 
+  # Get a list of all the files at the given path (Intended to find controllers here)
   def find_files(path) do
     File.ls path
   end
 
+  # Return a list of all the module names when given a list of compiled modules
+  # Expects a list of tuples with {Module, <<binary>>} format.
   defp mod_names(mod_list) do
     mod_extract = fn(mod_data, acc) ->
                     {mod, _} = mod_data
