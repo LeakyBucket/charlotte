@@ -7,9 +7,10 @@ defmodule Charlotte.Controllers.HTTP do
 
   # TODO: We should log here
   def init({:tcp, :http}, req, config) do
-    
+    {:ok, req, set_state(config)}
   end
 
+  # TODO: Log here too
   def handle(req, state) do
     
   end
