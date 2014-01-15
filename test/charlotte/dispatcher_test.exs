@@ -17,6 +17,6 @@ defmodule Charlotte.DispatcherTest do
     path = Path.expand(File.cwd! <> "/test/support")
     file = path <> "/config.exs"
 
-    assert Charlotte.Dispatcher.require_controllers([file]) == [Config]
+    assert Charlotte.Dispatcher.load_controllers([file]) == [Config]
   end
 end

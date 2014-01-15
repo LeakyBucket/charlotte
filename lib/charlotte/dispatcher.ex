@@ -1,9 +1,9 @@
 defmodule Charlotte.Dispatcher do
   def current_routes(config) do
-    controllers = find_files(config[:path]) |> require_controllers
+    controllers = find_files(config[:path]) |> load_controllers
   end
 
-  def require_controllers(files) do
+  def load_controllers(files) do
     compiled_mods = fn(file, acc) ->
                       mod_names(Code.load_file(file)) ++ acc
                     end
