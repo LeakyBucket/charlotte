@@ -1,5 +1,5 @@
 defmodule Charlotte.RouteAggregator do
-  def route_list(config) do
+  def current_routes(config) do
     controllers = find_files(config[:path]) |> require_controllers
   end
 
@@ -12,7 +12,7 @@ defmodule Charlotte.RouteAggregator do
   end
 
   def find_files(path) do
-    
+    File.ls path
   end
 
   defp mod_names(mod_list) do
