@@ -1,4 +1,4 @@
-defmodule Charlotte.RouteAggregator do
+defmodule Charlotte.Dispatcher do
   def current_routes(config) do
     controllers = find_files(config[:path]) |> require_controllers
   end
