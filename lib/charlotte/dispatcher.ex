@@ -14,7 +14,11 @@ defmodule Charlotte.Dispatcher do
 
   # Get a list of all the files at the given path (Intended to find controllers here)
   def find_files(path) do
-    File.ls path
+    {:ok, files} = File.ls path
+
+    Enum.reduce files, [], fn(file, acc) -> 
+                             [Path.join(path, file)] ++ acc 
+                           end
   end
 
   # Return a list of all the module names when given a list of compiled modules
