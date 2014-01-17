@@ -1,6 +1,12 @@
 defmodule Charlotte.Dispatcher do
   def current_routes(config) do
     controllers = find_files(config[:path]) |> load_controllers
+
+    path_builder = fn(mod, acc) ->
+                     Enum.reduce(mod.routes, [], &([{&1, mod, config}] ++ &2)) ++ acc
+                   end
+
+    Enum.reduce controllers, [], path_builder
   end
 
   # Reload all the controller files.
