@@ -1,4 +1,8 @@
 defmodule Charlotte.Controller do
+  @moduledoc """
+    
+  """
+
   defmacro setup do
     quote do
       def init({:tcp, :http}, req, config) do
