@@ -32,7 +32,8 @@ defmodule Charlotte.Mixfile do
       {:cowboy, github: "extend/cowboy" },
       {:exjson, github: "guedes/exjson"},
       {:plug, github: "elixir-lang/plug"},
-      {:exlager, github: "khia/exlager"}
+      {:exlager, github: "khia/exlager"},
+      {:ex_doc, github: "elixir-lang/ex_doc"}
     ]
   end
 end
