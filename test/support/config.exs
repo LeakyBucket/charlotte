@@ -5,7 +5,8 @@ defmodule Config do
       acceptors: 100,
       compress: false,
       host: "localhost",
-      port: 8080
+      port: 8080,
+      path: File.cwd! <> "/test/controllers"
     ]
   end
 end

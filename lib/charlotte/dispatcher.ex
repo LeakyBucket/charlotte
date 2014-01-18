@@ -1,4 +1,15 @@
 defmodule Charlotte.Dispatcher do
+  @moduledoc """
+    The Dispatcher Module builds the proper data structure for Cowboy to use as a router.  
+  """
+
+  @doc """
+    current_routes builds a list of tuples representing all the paths in the application as well as the module that handles that endpoint.
+
+    The config param must have a path key which specifies where the controller files can be found.
+
+    This function returns a list of tuples.  the tuples consist of the path, the module and the config data given to current_routes
+  """
   def current_routes(config) do
     controllers = find_files(config[:path]) |> load_controllers
 
@@ -10,7 +21,9 @@ defmodule Charlotte.Dispatcher do
     Enum.reduce controllers, [], path_builder
   end
 
-  # Reload all the controller files.
+  @doc """
+    load_controllers takes a list of file names (absolute path).  It compiles each file and returns a list of the modules that were generated.
+  """
   def load_controllers(files) do
     compiled_mods = fn(file, acc) ->
                       mod_names(Code.load_file(file)) ++ acc
@@ -19,7 +32,9 @@ defmodule Charlotte.Dispatcher do
     Enum.reduce(files, [], compiled_mods)
   end
 
-  # Get a list of all the files at the given path (Intended to find controllers here)
+  @doc """
+    find_files returns a list of all the files found at the given path.
+  """
   def find_files(path) do
     {:ok, files} = File.ls path
 
