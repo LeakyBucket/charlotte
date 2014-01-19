@@ -6,12 +6,6 @@ defmodule Charlotte.Handlers.HTTP do
     should implement a routes method which returns a list of {path, action} tuples.
   """
 
-  import Plug.Connection
-
-  @connection Plug.Adapters.Cowboy.Connection
-
-  defrecord State, protocol: nil
-
   @doc """
     The setup macro returns the definitions for the default init, handle and terminate callbacks.  These callbacks assume
     the controller module API follows what is outlined in the documentation.
@@ -19,7 +13,7 @@ defmodule Charlotte.Handlers.HTTP do
   defmacro setup do
     quote do
       def init({:tcp, :http}, req, config) do
-        []
+        {:ok, req, {:ok}}
       end
 
       def handle(req, state) do

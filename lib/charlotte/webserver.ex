@@ -4,7 +4,7 @@ defmodule Charlotte.Webserver do
   """
 
   @doc """
-    start is pretty self explanatory.  It takes a keyword list of configuration settings
+    Start the Cowboy webserver with the given configuration.
   """
   def start(options) do
     lc component inlist [:crypto, :public_key, :ssl, :mimetypes, :ranch, :cowlib, :cowboy], do: :application.start component
@@ -15,7 +15,7 @@ defmodule Charlotte.Webserver do
   end
 
   @doc """
-    update_routes takes a keyword list of options.  It recompiles the routes and updates the cowboy process with the newly compiled dispatcher.
+    Register a new set of routes with Cowboy.  This will perform a live update of the routes in the application.
   """
   def update_routes(options) do
     # TODO: Make more robust (should handle both http and https)
@@ -23,7 +23,7 @@ defmodule Charlotte.Webserver do
   end
 
   @doc """
-    
+    Compile new routes.  Routes will be read from current controllers.
   """
   def compile_routes(options) do
     :cowboy_router.compile([{options[:host], Charlotte.Dispatcher.current_routes(options)}])
