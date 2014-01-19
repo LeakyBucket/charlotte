@@ -25,25 +25,36 @@ defmodule Charlotte.Req do
     * path: The request path
     * scheme: :http or :https
   """
-  def parse(req, config) do
+  def build_conn(req, config) do
     {path, req} = R.path req
     {verb, req} = R.method req
     {headers, req} = R.headers req
     {params, req} = R.qs_vals req
+    {bindings, req} = R.bindings req
+    {body_qs, req} = R.body_qs req
+
+    params = bindings ++ body_qs ++ params
 
     Conn[
       verb: verb,
-      params: add_bindings(params, req),
+      params: normalize_to_atoms(params),
       headers: headers,
       path: path,
       scheme: scheme(config[:protocol])
     ]
   end
 
-  defp add_bindings(params, req) do
-    R.bindings(req) ++ params
+  def normalize_to_atoms(params) do
+    Enum.reduce params, [], fn(pair, acc) ->
+                              {key, value} = pair
+                              if is_atom(key) do
+                                [{key, value}] ++ acc
+                              else
+                                [{binary_to_atom(key), value}] ++ acc
+                              end
+                            end
   end
 
-  defp scheme(:tcp), do: :http
   defp scheme(:ssl), do: :https
+  defp scheme(_), do: :http
 end

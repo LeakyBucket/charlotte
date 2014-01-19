@@ -5,7 +5,7 @@ defmodule Charlotte.Mixfile do
     [ app: :charlotte,
       name: "Charlotte",
       version: "0.0.1",
-      elixir: "~> 0.12.2-dev",
+      elixir: "~> 0.12.2",
       deps: deps(Mix.env) ]
   end
 
@@ -24,7 +24,10 @@ defmodule Charlotte.Mixfile do
   # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps(env) when env in [:prod, :dev], do: deps(:default)
   defp deps(env) when env == :test do
-    [{ :hackney, github: "benoitc/hackney" }] ++ deps(:default)
+    [
+      { :hackney, github: "benoitc/hackney" },
+      { :amrita, github: "LeakyBucket/amrita", branch: "format_entry_arity" }
+    ] ++ deps(:default)
   end
 
   defp deps(env) when env == :default do

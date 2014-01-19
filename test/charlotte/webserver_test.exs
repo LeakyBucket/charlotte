@@ -1,15 +1,15 @@
 defmodule Charlotte.WebserverTest do
-  use ExUnit.Case
+  use Amrita.Sweet
 
   test "it starts a regular http server" do
-    assert Charlotte.Webserver.start(Config.config) == {:ok}
+    Charlotte.Webserver.start(Config.config) |> equals {:ok}
   end
 
   test "it reloads the routes" do
-    assert Charlotte.Webserver.update_routes(Config.config) == :ok
+    Charlotte.Webserver.update_routes(Config.config) |> equals :ok
   end
 
   test "it compiles the routes" do
-    assert Charlotte.Webserver.compile_routes(Config.config) == [:ok]
+    Charlotte.Webserver.compile_routes(Config.config) |> equals [:ok]
   end
 end
