@@ -3,13 +3,17 @@ Code.require_file "test/test_helper.exs", File.cwd!
 defmodule FakeController do
   require Charlotte.Handlers.HTTP
   Charlotte.Handlers.HTTP.setup
+
+  def routes do
+    [{"/fake", __MODULE__.fake}]
+  end
 end
 
 defmodule Charlotte.Handlers.HTTPTest do
   use Amrita.Sweet
 
   test "it responds to init" do
-    assert FakeController.init({:tcp, :http}, [], []) == []
+    FakeController.init({:tcp, :http}, [], [protocol: :tcp]) |> equals {:ok, [], :tcp}
   end
 
   test "it responds to handle" do
@@ -17,6 +21,6 @@ defmodule Charlotte.Handlers.HTTPTest do
   end
 
   test "it responds to terminate" do
-    assert FakeController.terminate([], [], []) == :ok
+    FakeController.terminate([], [], []) |> equals :ok
   end
 end

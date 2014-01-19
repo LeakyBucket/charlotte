@@ -19,11 +19,12 @@ defmodule Charlotte.Req do
     Parse the cowboy response structure and build a native Conn record.  
 
     A Charlotte Conn Record is structured as follows:  
-    * verb: HTTP Verb
-    * params: Query String and all URL Bindings
-    * headers: Request Headers
-    * path: The request path
-    * scheme: :http or :https
+
+    * verb: HTTP Verb  
+    * params: Query String and all URL Bindings  
+    * headers: Request Headers  
+    * path: The request path  
+    * scheme: :http or :https  
   """
   def build_conn(req, config) do
     {path, req} = R.path req

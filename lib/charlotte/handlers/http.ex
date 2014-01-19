@@ -13,15 +13,28 @@ defmodule Charlotte.Handlers.HTTP do
   defmacro setup do
     quote do
       def init({:tcp, :http}, req, config) do
-        {:ok, req, {:ok}}
+        {:ok, req, config[:protocol]}
       end
 
       def handle(req, state) do
-        []
+        conn = Charlotte.Req.build_conn req, state
+        action = find_action(conn.path)
+
+        # Invoke the proper action for the path
+        Code.eval_quoted quote do: __MODULE__.unquote(action)
       end
 
       def terminate(_reason, _req, _state) do
         :ok
+      end
+
+      defp find_action(path) do
+        {path, action} = Enum.find routes, fn(x) ->
+                                             {rel, action} = x
+                                             rel == path
+                                           end
+
+        action
       end
     end  
   end

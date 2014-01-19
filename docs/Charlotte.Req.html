@@ -40,10 +40,14 @@
         <h2 id="functions_summary">Functions summary</h2>
         <table class="summary">
           <tr>
-  <td class="summary_signature"><a href="#parse/2">parse(req, config)</a></td>
+  <td class="summary_signature"><a href="#build_conn/2">build_conn(req, config)</a></td>
   
     <td class="summary_synopsis"><p>Parse the cowboy response structure and build a native Conn record.  </p>
 </td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#normalize_to_atoms/1">normalize_to_atoms(params)</a></td>
   
 </tr>
 
@@ -60,19 +64,30 @@
         <div id="functions_details" class="details_list">
           <h2>Functions</h2>
           <div class="detail">
-  <p class="signature" id="parse/2">
-    <strong>parse(req, config)</strong>
+  <p class="signature" id="build_conn/2">
+    <strong>build_conn(req, config)</strong>
   </p>
   
   <div class="docstring"><p>Parse the cowboy response structure and build a native Conn record.  </p>
 
-<p>A Charlotte Conn Record is structured as follows:<br>
-  * verb: HTTP Verb
-  * params: Query String and all URL Bindings
-  * headers: Request Headers
-  * path: The request path
-  * scheme: :http or :https</p>
+<p>A Charlotte Conn Record is structured as follows:  </p>
+
+<ul>
+<li>verb: HTTP Verb<br></li>
+<li>params: Query String and all URL Bindings<br></li>
+<li>headers: Request Headers<br></li>
+<li>path: The request path<br></li>
+<li>scheme: :http or :https<br></li>
+</ul>
 </div>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="normalize_to_atoms/1">
+    <strong>normalize_to_atoms(params)</strong>
+  </p>
+  
+  <div class="docstring"></div>
   
 </div>
 

@@ -1,6 +1,13 @@
 defmodule Charlotte.Dispatcher do
   @moduledoc """
-    The Dispatcher Module builds the proper data structure for Cowboy to use as a router.  
+    The functions in Charlotte.Dispatcher are intended for building a proper structure for Cowboy's routing.  
+
+    The functions in Charlotte.Dispatcher make a few assumptions about the structure of the underlying application.  
+
+    * All controllers are assumed to be at the given path.  
+    * Each controller module must contain a routes function.  
+      * routes must return a list of tuples in the form of {path, action}  
+
   """
 
   @doc """
