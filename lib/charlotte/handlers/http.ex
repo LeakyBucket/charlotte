@@ -36,6 +36,14 @@ defmodule Charlotte.Handlers.HTTP do
 
         action
       end
+
+      # TODO: Figure a way that doesn't need the conn as an arg
+      defp render(status // 200, bindings, conn) do
+        body = Charlotte.Views.Renderer.render(__MODULE__, find_action(conn.path))
+        conn = Charlotte.Req.add_header {"content-type", "text/html"}
+
+        Charlotte.Req.reply(status, body, conn)
+      end
     end  
   end
 end

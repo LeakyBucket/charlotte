@@ -1,11 +1,9 @@
-Code.require_file "test/test_helper.exs", File.cwd!
-
 defmodule FakeController do
   require Charlotte.Handlers.HTTP
   Charlotte.Handlers.HTTP.setup
 
   def routes do
-    [{"/fake", __MODULE__.fake}]
+    [{"/fake", :fake}]
   end
 end
 
@@ -22,5 +20,9 @@ defmodule Charlotte.Handlers.HTTPTest do
 
   test "it responds to terminate" do
     FakeController.terminate([], [], []) |> equals :ok
+  end
+
+  describe "Rendering" do
+
   end
 end

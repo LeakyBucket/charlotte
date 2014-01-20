@@ -9,9 +9,11 @@ defmodule Charlotte.Req do
     The Conn organizes the data from the request.  It associates the data in a way that should be useful for a controller action.
   """
   defrecord Conn,
+    req: nil,
     verb: "",
     params: [],
-    headers: "",
+    req_headers: "",
+    headers: [],
     path: "",
     scheme: ""
 
@@ -27,19 +29,21 @@ defmodule Charlotte.Req do
     * scheme: :http or :https  
   """
   def build_conn(req, config) do
-    {path, req} = R.path req
-    {verb, req} = R.method req
-    {headers, req} = R.headers req
-    {params, req} = R.qs_vals req
-    {bindings, req} = R.bindings req
-    {body_qs, req} = R.body_qs req
+    {path, req} = Request.path req
+    {verb, req} = Request.method req
+    {headers, req} = Request.headers req
+    {params, req} = Request.qs_vals req
+    {bindings, req} = Request.bindings req
+    {body_qs, req} = Request.body_qs req
 
     params = bindings ++ body_qs ++ params
 
     Conn[
+      req: req,
       verb: verb,
       params: normalize_to_atoms(params),
-      headers: headers,
+      req_headers: headers,
+      headers: [],
       path: path,
       scheme: scheme(config[:protocol])
     ]
@@ -56,6 +60,11 @@ defmodule Charlotte.Req do
                             end
   end
 
+  def add_header(conn, header), do: conn.headers([header] ++ conn.headers)
+
+  def reply(status, conn), do: Request.reply(status, conn.headers, conn.req)
+  def reply(status, body, conn), do: Request.reply(status, conn.headers, body, conn.req)
+  
   defp scheme(:ssl), do: :https
   defp scheme(_), do: :http
 end
