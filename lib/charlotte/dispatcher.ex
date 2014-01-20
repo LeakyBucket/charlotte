@@ -22,7 +22,10 @@ defmodule Charlotte.Dispatcher do
 
     # Get the routes from each controller then build dispatch list for Cowboy.
     path_builder = fn(mod, acc) ->
-                     Enum.reduce(mod.routes, [], &([{&1, mod, config}] ++ &2)) ++ acc
+                     Enum.reduce(mod.routes, [], fn(route, acc) ->
+                       {path, _} = route
+                       [{path, mod, config}] ++ acc
+                     end) ++ acc
                    end
 
     Enum.reduce controllers, [], path_builder

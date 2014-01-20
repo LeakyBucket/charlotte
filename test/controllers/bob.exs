@@ -1,9 +1,8 @@
 defmodule Bob do
   def routes do
     [
-      "/bob",
-      "/bobby"
+      {"/bob", :bob},
+      {"/bobby", :bobby}
     ]
-  end
-  
+  end  
 end
