@@ -49,6 +49,9 @@ defmodule Charlotte.Req do
     ]
   end
 
+  @doc """
+    Takes a list of tuples and modifies it so that the first value in each tuple is an atom.  
+  """
   def normalize_to_atoms(params) do
     Enum.reduce params, [], fn(pair, acc) ->
                               {key, value} = pair
@@ -60,11 +63,24 @@ defmodule Charlotte.Req do
                             end
   end
 
+  @doc """
+    Add a new header tuple for the response.  
+
+    add_header takes two arguments a Charlotte.Req.Conn record and a header tuple.  
+  """
   def add_header(conn, header), do: conn.headers([header] ++ conn.headers)
 
+  @doc """
+    Send the reply back to the Client.
+
+    reply takes either a status and a conn record or a status, body and conn record.
+    Any specific response headers should be set on the conn record prior to calling 
+    reply.  
+  """
   def reply(status, conn), do: Request.reply(status, conn.headers, conn.req)
   def reply(status, body, conn), do: Request.reply(status, conn.headers, body, conn.req)
   
+  # Set the scheme on the conn record
   defp scheme(:ssl), do: :https
   defp scheme(_), do: :http
 end

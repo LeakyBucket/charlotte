@@ -10,19 +10,21 @@ end
 defmodule Charlotte.Handlers.HTTPTest do
   use Amrita.Sweet
 
-  test "it responds to init" do
-    FakeController.init({:tcp, :http}, [], [protocol: :tcp]) |> equals {:ok, [], :tcp}
-  end
+  describe "setup" do
+    it "Adds the init callback for Cowboy" do
+      FakeController.init({:tcp, :http}, [], [protocol: :tcp]) |> equals {:ok, [], :tcp}
+    end
 
-  test "it responds to handle" do
-    assert FakeController.handle([], []) == []
-  end
+    it "Adds the handle callback for Cowboy" do
+      FakeController.handle([], []) |> equals :ok
+    end
 
-  test "it responds to terminate" do
-    FakeController.terminate([], [], []) |> equals :ok
-  end
+    it "Adds the terminate callback for Cowboy" do
+      FakeController.terminate([], [], []) |> equals :ok
+    end
 
-  describe "Rendering" do
-
+    it "Adds the render function" do
+      
+    end
   end
 end

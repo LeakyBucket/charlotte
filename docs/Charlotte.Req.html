@@ -40,6 +40,13 @@
         <h2 id="functions_summary">Functions summary</h2>
         <table class="summary">
           <tr>
+  <td class="summary_signature"><a href="#add_header/2">add_header(conn, header)</a></td>
+  
+    <td class="summary_synopsis"><p>Add a new header tuple for the response.  </p>
+</td>
+  
+</tr>
+<tr>
   <td class="summary_signature"><a href="#build_conn/2">build_conn(req, config)</a></td>
   
     <td class="summary_synopsis"><p>Parse the cowboy response structure and build a native Conn record.  </p>
@@ -48,6 +55,20 @@
 </tr>
 <tr>
   <td class="summary_signature"><a href="#normalize_to_atoms/1">normalize_to_atoms(params)</a></td>
+  
+    <td class="summary_synopsis"><p>Takes a list of tuples and modifies it so that the first value in each tuple is an atom.  </p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#reply/2">reply(status, conn)</a></td>
+  
+    <td class="summary_synopsis"><p>Send the reply back to the Client.</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#reply/3">reply(status, body, conn)</a></td>
   
 </tr>
 
@@ -64,6 +85,17 @@
         <div id="functions_details" class="details_list">
           <h2>Functions</h2>
           <div class="detail">
+  <p class="signature" id="add_header/2">
+    <strong>add_header(conn, header)</strong>
+  </p>
+  
+  <div class="docstring"><p>Add a new header tuple for the response.  </p>
+
+<p>add_header takes two arguments a Charlotte.Req.Conn record and a header tuple.  </p>
+</div>
+  
+</div>
+<div class="detail">
   <p class="signature" id="build_conn/2">
     <strong>build_conn(req, config)</strong>
   </p>
@@ -85,6 +117,28 @@
 <div class="detail">
   <p class="signature" id="normalize_to_atoms/1">
     <strong>normalize_to_atoms(params)</strong>
+  </p>
+  
+  <div class="docstring"><p>Takes a list of tuples and modifies it so that the first value in each tuple is an atom.  </p>
+</div>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="reply/2">
+    <strong>reply(status, conn)</strong>
+  </p>
+  
+  <div class="docstring"><p>Send the reply back to the Client.</p>
+
+<p>reply takes either a status and a conn record or a status, body and conn record.
+  Any specific response headers should be set on the conn record prior to calling 
+  reply.  </p>
+</div>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="reply/3">
+    <strong>reply(status, body, conn)</strong>
   </p>
   
   <div class="docstring"></div>
