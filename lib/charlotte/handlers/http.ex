@@ -21,7 +21,7 @@ defmodule Charlotte.Handlers.HTTP do
         action = find_action(conn.path)
 
         # Invoke the proper action for the path
-        Code.eval_quoted quote do: __MODULE__.unquote(action)
+        Code.eval_quoted quote do: __MODULE__.unquote(action)(unquote(conn.verb), unquote(conn.params), unquote(conn))
       end
 
       def terminate(_reason, _req, _state) do
@@ -39,7 +39,7 @@ defmodule Charlotte.Handlers.HTTP do
 
       # TODO: Figure a way that doesn't need the conn as an arg
       defp render(status // 200, bindings, conn) do
-        body = Charlotte.Views.Renderer.render(__MODULE__, find_action(conn.path))
+        body = Charlotte.View.Renderer.render(__MODULE__, find_action(conn.path), bindings)
         conn = Charlotte.Req.add_header {"content-type", "text/html"}
 
         Charlotte.Req.reply(status, body, conn)
