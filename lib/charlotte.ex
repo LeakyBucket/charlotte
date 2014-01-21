@@ -22,11 +22,11 @@ defmodule Charlotte do
         ]
       end
 
-      def action1 do
+      def action1(verb, params, conn) do
         
       end
       
-      def action2 do
+      def action2(verb, params, conn) do
         
       end
     end
