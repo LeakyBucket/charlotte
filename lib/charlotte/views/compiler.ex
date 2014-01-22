@@ -6,4 +6,18 @@ defmodule Charlotte.Views.Compiler do
 
     
   """
+
+  @doc """
+    Compile the views found at path.  
+
+    If the env param is "dev" or "development" then the View module will load the View on every request.  Otherwise the view will be compiled ahead of time.
+  """
+  def compile(env, path) when env in ["dev", "development"] do
+    
+  end
+  def compile(_env, path) do
+    
+  end
+  
+  
 end

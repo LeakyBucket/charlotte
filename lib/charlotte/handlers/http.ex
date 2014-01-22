@@ -8,7 +8,16 @@ defmodule Charlotte.Handlers.HTTP do
 
   @doc """
     The setup macro returns the definitions for the default init, handle and terminate callbacks.  These callbacks assume
-    the controller module API follows what is outlined in the documentation.
+    the controller module API follows what is outlined in the documentation.  
+
+    The handle callback is the most complex behavior wise.  It builds a Charlotte.Req.Conn Record, it looks
+    up the action for the path and calls the action with the verb, params, and conn record.  
+
+    setup also adds three convenience functions for crafting responses for the client:  
+
+    * render(status // 200, bindings conn)  
+    * redirect(status // 302, conn)  
+    * forbidden(conn)  
   """
   defmacro setup do
     quote do
