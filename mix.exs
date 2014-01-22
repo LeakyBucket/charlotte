@@ -26,7 +26,7 @@ defmodule Charlotte.Mixfile do
   defp deps(env) when env == :test do
     [
       { :hackney, github: "benoitc/hackney" },
-      { :amrita, github: "LeakyBucket/amrita", branch: "format_entry_arity" }
+      { :amrita, github: "josephwilk/amrita" }
     ] ++ deps(:default)
   end
 

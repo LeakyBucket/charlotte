@@ -22,8 +22,17 @@ defmodule Charlotte.Views.Compiler do
   end
 
   # Assuming .eex extension on all views
+  # TODO: Break into separate functions?
   defp gather_views(path) do
-    
+    {:ok, contents} = File.ls(path)
+    Enum.reduce contents, [], fn(file, acc) ->
+                                target = Path.join(path, file)
+                                if File.dir?(target) do
+                                  gather_views(target) ++ acc
+                                else
+                                  [target] ++ acc 
+                                end
+                              end
   end
 
   # Assuming controller/view.eex convention

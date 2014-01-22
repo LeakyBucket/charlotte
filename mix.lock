@@ -1,4 +1,4 @@
-[ "amrita": {:git, "git://github.com/LeakyBucket/amrita.git", "d9b4d2067caf3b7fdc9e6e229bd622aa8a29223f", [branch: "format_entry_arity"]},
+[ "amrita": {:git, "git://github.com/josephwilk/amrita.git", "8e59157c0fb6791a4d76a14793e3a361b654f7a7", []},
   "cowboy": {:git, "git://github.com/extend/cowboy.git", "0ec713fc4b185c3cd0f6b2e7ec2c5f198361bddd", []},
   "cowlib": {:git, "git://github.com/extend/cowlib.git", "63298e8e160031a70efff86a1acde7e7db1fcda6", [ref: "0.4.0"]},
   "ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "aecbe8cf755fc81d76e2924d69a33642b7945af9", []},
