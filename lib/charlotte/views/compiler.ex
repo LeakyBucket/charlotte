@@ -25,6 +25,7 @@ defmodule Charlotte.Views.Compiler do
   # TODO: Break into separate functions?
   defp gather_views(path) do
     {:ok, contents} = File.ls(path)
+
     Enum.reduce contents, [], fn(file, acc) ->
                                 target = Path.join(path, file)
                                 if File.dir?(target) do
@@ -38,6 +39,11 @@ defmodule Charlotte.Views.Compiler do
   # Assuming controller/view.eex convention
   defp view_to_mod(view) do
     
+  end
+
+  # camelize a given binary
+  defp camelize(name) do
+    String.split(name, "_") |> Enum.map_join &(String.capitalize(&1))
   end
 
   # Compile the view for production
