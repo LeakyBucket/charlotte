@@ -36,15 +36,34 @@ defmodule Charlotte.Views.Compiler do
                               end
   end
 
-  # Assuming controller/view.eex convention
+  # Build a dict of module names and action -> view lists
+  #
+  #  Charlotte.Views.ControllerName => [{:action_name, file}]
+  defp view_dict(views) do
+    Enum.reduce views, HashDict.new, fn(file, acc) ->
+                                       HashDict.update acc, view_to_mod(file), [{action(file), file}], &([{action(file), file}] ++ &1)
+                                     end
+  end
+
+  # Assuming views/controller/view.eex convention
   defp view_to_mod(view) do
-    
+    [controller | rest] = drop_preamble String.split(view, "/")
+
+    Module.concat ["Charlotte", "Views", camelize(controller)]
   end
 
   # camelize a given binary
   defp camelize(name) do
     String.split(name, "_") |> Enum.map_join &(String.capitalize(&1))
   end
+
+  defp action(file) do
+    String.split(file, "/") |> List.last |> String.split(".") |> List.first |> binary_to_atom
+  end
+
+  # Drop the beginning of the path
+  defp drop_preamble(["views" | tail]), do: tail
+  defp drop_preamble([head | tail]), do: drop_preamble(tail)
 
   # Compile the view for production
   # TODO: Decide on structure.  Does it make more sense to build separate module for each view or a function inside a Views submodule for the controller?
