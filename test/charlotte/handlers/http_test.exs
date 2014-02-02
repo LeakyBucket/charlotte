@@ -24,7 +24,7 @@ defmodule Charlotte.Handlers.HTTPTest do
     end
 
     it "Adds the render function" do
-      
+      Module.defines?(FakeController, {:render, 3}) |> equals true
     end
   end
 end

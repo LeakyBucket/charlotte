@@ -81,14 +81,21 @@ defmodule Charlotte.Views.Compiler do
   end
 
   # Compile the view for dev
+  # TODO: Handle new views.
   defp on_demand_view(mod_name, actions) do
     defmodule mod_name do
       require EEx
 
       Enum.each actions, fn(action) ->
-                           {name, file} = action
-                           EEx.eval_file(:def, name, file, [:assigns])
-                         end
+                            {name, file} = action
+                            quoted = quote bind_quoted: [name: name, file: file] do
+                              def unquote(name)(assigns) do
+                                EEx.eval_file(unquote(file), assigns: assigns)
+                              end
+                            end
+
+                            Module.eval_quoted mod_name, quoted
+                          end
     end
   end
 
