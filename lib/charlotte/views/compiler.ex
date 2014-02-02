@@ -11,14 +11,21 @@ defmodule Charlotte.Views.Compiler do
     If the env param is "dev" or "development" then the View module will load the View on every request.  Otherwise the view will be compiled ahead of time.
   """
   def compile(env, path) when env in ["dev", "development"] do
-    Enum.reduce gather_views(path), [], fn(view) ->
-                                    view
+    Enum.reduce comp_dict(path), [], fn(view, acc) ->
+                                    {mod, actions} = view
+                                    [on_demand_view(mod, actions)] ++ acc
                                   end
   end
   def compile(_env, path) do
-    Enum.reduce gather_views(path), [], fn(view) ->
-                                    view
+    Enum.reduce comp_dict(path), [], fn(view, acc) ->
+                                    {mod, actions} = view
+                                    [compiled_view(mod, actions)] ++ acc
                                   end
+  end
+
+  # build the compilation dict
+  defp comp_dict(path) do
+    path |> gather_views |> view_dict
   end
 
   # Assuming .eex extension on all views
@@ -61,18 +68,31 @@ defmodule Charlotte.Views.Compiler do
     String.split(file, "/") |> List.last |> String.split(".") |> List.first |> binary_to_atom
   end
 
-  # Drop the beginning of the path
-  defp drop_preamble(["views" | tail]), do: tail
-  defp drop_preamble([head | tail]), do: drop_preamble(tail)
-
   # Compile the view for production
-  # TODO: Decide on structure.  Does it make more sense to build separate module for each view or a function inside a Views submodule for the controller?
-  defp compiled_view(mod_name, file) do
-    # TODO: use EEx.function_from_file
+  defp compiled_view(mod_name, actions) do
+    defmodule mod_name do
+      require EEx
+
+      Enum.each actions, fn(action) ->
+                           {name, file} = action
+                           EEx.function_from_file(:def, name, file, [:assigns])
+                         end
+    end
   end
 
   # Compile the view for dev
-  defp on_demand_view(mod_name, file) do
-    # TODO: use EEx.eval_file
+  defp on_demand_view(mod_name, actions) do
+    defmodule mod_name do
+      require EEx
+
+      Enum.each actions, fn(action) ->
+                           {name, file} = action
+                           EEx.eval_file(:def, name, file, [:assigns])
+                         end
+    end
   end
+
+  # Drop the beginning of the path
+  defp drop_preamble(["views" | tail]), do: tail
+  defp drop_preamble([head | tail]), do: drop_preamble(tail)
 end
