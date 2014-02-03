@@ -15,7 +15,7 @@ defmodule Charlotte.Handlers.HTTP do
 
     setup also adds three convenience functions for crafting responses for the client:  
 
-    * render(status // 200, bindings conn)  
+    * render(status // 200, bindings, conn)  
     * redirect(status // 302, conn)  
     * forbidden(conn)  
   """
