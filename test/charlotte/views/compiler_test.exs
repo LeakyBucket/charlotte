@@ -11,7 +11,15 @@ defmodule Charlotte.Views.CompilerTest do
     end
 
     it "doesn't render changes to view after compilation" do
+      view = test_view_path <> "/fake_controller/new.eex"
+      content = original_content(view)
+      Charlotte.Views.Compiler.compile "production", test_view_path
 
+      write_to_file view, (content <> "<%= @lou %>")
+
+      Charlotte.Views.FakeController.new([pants: "Check", lou: "ser"]) |> equals "Check\n"
+
+      write_to_file view, content
     end
   end
 
@@ -23,11 +31,22 @@ defmodule Charlotte.Views.CompilerTest do
     end
 
     it "renders updates to the view after compilation" do
+      view = test_view_path <> "/fake_controller/new.eex"
+      content = original_content(view)
 
+      Charlotte.Views.Compiler.compile "development", test_view_path
+
+      write_to_file view, (content <> "<%= @lou %>")
+
+      Charlotte.Views.FakeController.new([pants: "Check", lou: "ser"]) |> equals "Check\nser"
+
+      write_to_file view, content
     end
 
     #TODO: Handle new views
   end
 
   defp test_view_path, do: Path.join([__DIR__, "../../views"]) |> Path.expand
+  defp original_content(view), do: File.read!(view)
+  defp write_to_file(file, content), do: File.write(file, content)
 end
