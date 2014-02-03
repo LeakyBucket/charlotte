@@ -2,6 +2,8 @@ defmodule Charlotte.Handlers.HTTP do
   @moduledoc """
     The HTTP Handler module provides the basic HTTP 1.1 callbacks Cowboy expects in a route handler.  
 
+    This is important because each controller in Charlotte is treated as a Reuqest Handler for the routes it defines.  
+
     To build an HTTP 1.1 Controller simply require this module and call the setup macro.  Your Controller Module
     should implement a routes method which returns a list of {path, action} tuples.
   """
