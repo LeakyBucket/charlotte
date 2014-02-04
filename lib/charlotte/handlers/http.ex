@@ -21,7 +21,7 @@ defmodule Charlotte.Handlers.HTTP do
     * redirect(status // 302, conn)  
     * forbidden(conn)  
   """
-  defmacro setup do
+  defmacro __using__(args) do
     quote do
       def init({:tcp, :http}, req, config) do
         {:ok, req, config[:protocol]}
@@ -52,7 +52,7 @@ defmodule Charlotte.Handlers.HTTP do
       # TODO: Figure a way that doesn't need the conn as an arg
       defp render(status // 200, bindings, conn) do
         body = Charlotte.View.Renderer.render(__MODULE__, find_action(conn.path), bindings)
-        conn = Charlotte.Req.add_header {"content-type", "text/html"}
+        conn = conn |> Charlotte.Req.add_header {"content-type", "text/html"}
 
         Charlotte.Req.reply(status, body, conn)
       end

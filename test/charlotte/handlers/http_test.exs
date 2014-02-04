@@ -1,7 +1,6 @@
 defmodule FakeController do
-  require Charlotte.Handlers.HTTP
-  Charlotte.Handlers.HTTP.setup
-
+  use Charlotte.Handlers.HTTP
+  
   def routes do
     [{"/bob", :bob}]
   end
