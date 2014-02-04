@@ -32,7 +32,7 @@ defmodule Charlotte.Handlers.HTTP do
         action = find_action(conn.path)
 
         # Invoke the proper action for the path
-        Code.eval_quoted quote do: __MODULE__.unquote(action)(unquote(conn.verb), unquote(conn.params), unquote(conn))
+        Kernel.apply(__MODULE__, action, [conn.verb, conn.params, conn])
       end
 
       def terminate(_reason, _req, _state) do
@@ -40,10 +40,11 @@ defmodule Charlotte.Handlers.HTTP do
       end
 
       defp find_action(path) do
-        {path, action} = Enum.find routes, fn(x) ->
-                                             {rel, action} = x
-                                             rel == path
-                                           end
+        IO.puts path
+        {relative, action} = Enum.find routes, fn(x) ->
+                                                 {rel, action} = x
+                                                 rel == path
+                                               end
 
         action
       end

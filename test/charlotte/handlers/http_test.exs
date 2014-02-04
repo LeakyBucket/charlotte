@@ -3,7 +3,11 @@ defmodule FakeController do
   Charlotte.Handlers.HTTP.setup
 
   def routes do
-    [{"/fake", :fake}]
+    [{"/bob", :bob}]
+  end
+
+  def bob(verb, params, conn) do
+    :ok
   end
 end
 
