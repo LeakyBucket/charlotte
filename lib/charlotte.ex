@@ -44,6 +44,23 @@ defmodule Charlotte do
   def start(_type, _args) do
     Charlotte.Webserver.start Config.config
 
+    start_logging
+
     Charlotte.Supervisor.start_link
   end
+
+  # Setup lager for our purposes.
+  # TODO: Figure out why lager_file_backend isn't working.
+  defp start_logging do
+    :ok = :application.start(:compiler)
+    :ok = :application.start(:syntax_tools)
+    :ok = :application.start(:goldrush)
+    :ok = :application.start(:lager)
+
+    :lager.set_loglevel :lager_console_backend, log_level(Mix.env)
+    :lager.set_loglevel :lager_file_backend, "log/#{Mix.env}.log", log_level(Mix.env)
+  end
+
+  defp log_level(env) when env in [:prod, :production], do: :info
+  defp log_level(env), do: :debug
 end

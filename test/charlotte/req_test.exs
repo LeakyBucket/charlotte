@@ -1,5 +1,5 @@
 defmodule :cowboy_req do
-  def path(_), do: {"bob", []}
+  def path(_), do: {"/bob", []}
   def method(_), do: {"GET", []}
   def headers(_), do: {"", []}
   def qs_vals(_), do: {[{"cat", "meow"}], []}
@@ -20,7 +20,7 @@ defmodule Charlotte.ReqTest do
 
   describe "build_conn" do
     it "returns a conn record with the data from the request" do
-      Charlotte.Req.build_conn([], [{:protocol, :tcp}]) |> equals Charlotte.Req.Conn[req: [], verb: "GET", params: [cat: "meow", fish: "glug", dog: "woof"], req_headers: "", headers: [], path: "bob", scheme: :http]
+      Charlotte.Req.build_conn([], [{:protocol, :tcp}]) |> equals Charlotte.Req.Conn[req: [], verb: "GET", params: [cat: "meow", fish: "glug", dog: "woof"], req_headers: "", headers: [], path: "/bob", scheme: :http]
     end
   end
 
@@ -33,7 +33,7 @@ defmodule Charlotte.ReqTest do
 
     it "sends a reply to the client with a body" do
       provided [Charlotee.Req.Request.reply(_, _, _, _) |> true] do
-        Charlotte.Req.reply(200, "bob", []) |> truthy
+        Charlotte.Req.reply(200, "/bob", []) |> truthy
       end
     end
   end
