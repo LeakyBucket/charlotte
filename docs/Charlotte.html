@@ -38,8 +38,7 @@
 <p>For example:  </p>
 
 <pre><code>  defmodule MyController do
-    require Charlotte.Handlers.HTTP
-    Charlotte.Handlers.HTTP.setup
+    use Charlotte.Handlers.HTTP
 
     def routes do
       [
@@ -75,6 +74,9 @@
           <tr>
   <td class="summary_signature"><a href="#start/2">start(_type, _args)</a></td>
   
+    <td class="summary_synopsis"><p>Callback implementation of <a href="http://www.erlang.org/doc/man/application.html#start-2"><code>:application.start/2</code></a>.</p>
+</td>
+  
 </tr>
 
         </table>
@@ -94,7 +96,8 @@
     <strong>start(_type, _args)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Callback implementation of <a href="http://www.erlang.org/doc/man/application.html#start-2"><code>:application.start/2</code></a>.</p>
+</div>
   
 </div>
 

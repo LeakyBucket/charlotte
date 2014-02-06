@@ -4,6 +4,7 @@ defmodule Charlotte.LoggerTest do
   describe "Debug" do
     it "writes to debug.log" do
       Charlotte.Logger.debug "Debug"
+      Charlotte.Logger.debug "Pants!"
     end
   end
 

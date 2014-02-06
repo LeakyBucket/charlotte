@@ -12,8 +12,7 @@ defmodule Charlotte do
 
     ```
     defmodule MyController do
-      require Charlotte.Handlers.HTTP
-      Charlotte.Handlers.HTTP.setup
+      use Charlotte.Handlers.HTTP
 
       def routes do
         [
@@ -52,13 +51,18 @@ defmodule Charlotte do
   # Setup lager for our purposes.
   # TODO: Figure out why lager_file_backend isn't working.
   defp start_logging do
+    set_lager_env
+
     :ok = :application.start(:compiler)
     :ok = :application.start(:syntax_tools)
     :ok = :application.start(:goldrush)
     :ok = :application.start(:lager)
+  end
 
-    :lager.set_loglevel :lager_console_backend, log_level(Mix.env)
-    :lager.set_loglevel :lager_file_backend, "log/#{Mix.env}.log", log_level(Mix.env)
+  defp set_lager_env do
+    :ok = :application.load(:lager)
+
+    :application.set_env(:lager, :handlers, lager_console_backend: log_level(Mix.env), lager_file_backend: [file: "log/#{Mix.env}.log", level: log_level(Mix.env), size: 10485760, date: '$D0', count: 5])
   end
 
   defp log_level(env) when env in [:prod, :production], do: :info

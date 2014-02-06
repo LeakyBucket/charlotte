@@ -13,7 +13,15 @@ defmodule Charlotte.Mixfile do
   def application do
     [
       mod: { Charlotte, [] },
-      registered: [:charlotte]
+      registered: [:charlotte],
+      env: [lager: [
+          handlers: [
+            {:lager_console_backend, :info},
+            {:lager_file_backend, [{:file, "error.log"}, {:level, :error}]},
+            {:lager_file_backend, [{:file, "console.log"}, {:level, :info}]},
+          ]
+        ]
+      ]
     ]
   end
 
