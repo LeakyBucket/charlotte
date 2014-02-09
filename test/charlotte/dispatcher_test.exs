@@ -1,4 +1,4 @@
-EnvConf.Server.start_link
+EnvConf.Server.start_link []
 
 defmodule Charlotte.DispatcherTest do
   use Amrita.Sweet
