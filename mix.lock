@@ -1,6 +1,7 @@
 [ "amrita": {:git, "git://github.com/josephwilk/amrita.git", "8e59157c0fb6791a4d76a14793e3a361b654f7a7", []},
   "cowboy": {:git, "git://github.com/extend/cowboy.git", "0ec713fc4b185c3cd0f6b2e7ec2c5f198361bddd", []},
   "cowlib": {:git, "git://github.com/extend/cowlib.git", "63298e8e160031a70efff86a1acde7e7db1fcda6", [ref: "0.4.0"]},
+  "env_conf": {:git, "git://github.com/LeakyBucket/env_conf.git", "1ab8b5c77290e0a7330ccf8625fff6a0ac3cc471", []},
   "ex_doc": {:git, "git://github.com/elixir-lang/ex_doc.git", "aecbe8cf755fc81d76e2924d69a33642b7945af9", []},
   "exjson": {:git, "git://github.com/guedes/exjson.git", "bd9dcb7e78c2344bb491098405f2b81d53979dcd", []},
   "exlager": {:git, "git://github.com/khia/exlager.git", "0b840aae773e6eb6de7cdbb703b47031b6608bfb", []},

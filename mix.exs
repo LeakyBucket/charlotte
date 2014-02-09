@@ -4,8 +4,8 @@ defmodule Charlotte.Mixfile do
   def project do
     [ app: :charlotte,
       name: "Charlotte",
-      version: "0.0.1",
-      elixir: "~> 0.12.2",
+      version: "0.0.8",
+      elixir: "~> 0.12.3",
       deps: deps(Mix.env) ]
   end
 
@@ -44,7 +44,8 @@ defmodule Charlotte.Mixfile do
       {:exjson, github: "guedes/exjson"},
       {:plug, github: "elixir-lang/plug"},
       {:exlager, github: "khia/exlager"},
-      {:ex_doc, github: "elixir-lang/ex_doc"}
+      {:ex_doc, github: "elixir-lang/ex_doc"},
+      {:env_conf, github: "LeakyBucket/env_conf"}
     ]
   end
 end

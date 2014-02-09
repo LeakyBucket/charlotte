@@ -9,7 +9,7 @@ defmodule Charlotte.Handlers.HTTP do
   """
 
   @doc """
-    The setup macro returns the definitions for the default init, handle and terminate callbacks.  These callbacks assume
+    Using sets up the definitions for the default init, handle and terminate callbacks.  These callbacks assume
     the controller module API follows what is outlined in the documentation.  
 
     The handle callback is the most complex behavior wise.  It builds a Charlotte.Req.Conn Record, it looks
@@ -21,8 +21,10 @@ defmodule Charlotte.Handlers.HTTP do
     * redirect(status // 302, conn)  
     * forbidden(conn)  
   """
-  defmacro __using__(args) do
+  defmacro __using__(_args) do
     quote do
+      @layout nil
+
       def init({:tcp, :http}, req, config) do
         {:ok, req, config[:protocol]}
       end
@@ -49,9 +51,8 @@ defmodule Charlotte.Handlers.HTTP do
         action
       end
 
-      # TODO: Figure a way that doesn't need the conn as an arg
       defp render(status // 200, bindings, conn) do
-        body = Charlotte.View.Renderer.render(__MODULE__, find_action(conn.path), bindings)
+        body = Charlotte.View.Renderer.render(__MODULE__, find_action(conn.path), bindings, @layout)
         conn = conn |> Charlotte.Req.add_header {"content-type", "text/html"}
 
         Charlotte.Req.reply(status, body, conn)

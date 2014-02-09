@@ -41,15 +41,19 @@ defmodule Charlotte do
   # See http://elixir-lang.org/docs/stable/Application.Behaviour.html
   # for more information on OTP Applications
   def start(_type, _args) do
+    # TODO: Pass any defaults from the config file.
+    start_config
     Charlotte.Webserver.start Config.config
-
     start_logging
 
     Charlotte.Supervisor.start_link
   end
 
+  defp start_config(defaults // []) do
+    EnvConf.Server.start_link(defaults)
+  end
+
   # Setup lager for our purposes.
-  # TODO: Figure out why lager_file_backend isn't working.
   defp start_logging do
     set_lager_env
 
