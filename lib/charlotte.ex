@@ -43,14 +43,14 @@ defmodule Charlotte do
   def start(_type, _args) do
     # TODO: Pass any defaults from the config file.
     start_config
-    Charlotte.Webserver.start Config.config
+    Charlotte.Webserver.start
     start_logging
 
     Charlotte.Supervisor.start_link
   end
 
   defp start_config(defaults // []) do
-    EnvConf.Server.start_link(defaults)
+    EnvConf.Supervisor.start_link(defaults)
   end
 
   # Setup lager for our purposes.

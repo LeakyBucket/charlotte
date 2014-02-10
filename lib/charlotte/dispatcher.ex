@@ -17,14 +17,14 @@ defmodule Charlotte.Dispatcher do
 
     This function returns a list of tuples.  the tuples consist of the path, the module and the config data given to current_routes
   """
-  def current_routes(config) do
-    controllers = find_files(config[:path]) |> load_controllers
+  def current_routes do
+    controllers = find_files |> load_controllers
 
     # Get the routes from each controller then build dispatch list for Cowboy.
     path_builder = fn(mod, acc) ->
                      Enum.reduce(mod.routes, [], fn(route, acc) ->
                        {path, _} = route
-                       [{path, mod, config}] ++ acc
+                       [{path, mod, []}] ++ acc
                      end) ++ acc
                    end
 
@@ -45,11 +45,12 @@ defmodule Charlotte.Dispatcher do
   @doc """
     find_files returns a list of all the files found at the given path.
   """
-  def find_files(path) do
-    {:ok, files} = File.ls path
+  def find_files do
+    location = EnvConf.Server.get "CHARLOTTE_CONTROLLER_PATH"
+    {:ok, files} = File.ls location
 
     Enum.reduce files, [], fn(file, acc) -> 
-                             [Path.join(path, file)] ++ acc 
+                             [Path.join(location, file)] ++ acc 
                            end
   end
 
