@@ -2,16 +2,15 @@ defmodule Charlotte.DispatcherTest do
   use Amrita.Sweet
 
   test "it builds a list of routes and handlers" do
-    path = [path: File.cwd! <> "/test/controllers"]
-    route_list = Charlotte.Dispatcher.current_routes [path: File.cwd! <> "/test/controllers"]
+    route_list = Charlotte.Dispatcher.current_routes
 
-    [{"/", Root, path}, {"/bobby", Bob, path}, {"/bob", Bob, path}] |> equals route_list
+    [{"/", Root, []}, {"/bobby", Bob, []}, {"/bob", Bob, []}] |> equals route_list
   end
 
   test "it finds the files at the given location" do
-    path = Path.expand(File.cwd! <> "/test/support")
+    {:ok, controllers} = File.ls(controller_dir)
 
-    Charlotte.Dispatcher.find_files(path) |> equals [path]
+    Charlotte.Dispatcher.find_files |> equals Enum.reverse(Enum.map(controllers, &("#{controller_dir}/" <> &1)))
   end
 
   test "it loads the files in the list" do
@@ -20,4 +19,6 @@ defmodule Charlotte.DispatcherTest do
 
     Charlotte.Dispatcher.load_controllers([file]) |> equals [Config]
   end
+
+  defp controller_dir, do: File.cwd! <> "/test/controllers"
 end

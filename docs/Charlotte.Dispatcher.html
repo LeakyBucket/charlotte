@@ -51,14 +51,14 @@
         <h2 id="functions_summary">Functions summary</h2>
         <table class="summary">
           <tr>
-  <td class="summary_signature"><a href="#current_routes/1">current_routes(config)</a></td>
+  <td class="summary_signature"><a href="#current_routes/0">current_routes()</a></td>
   
     <td class="summary_synopsis"><p>current_routes builds a list of tuples representing all the paths in the application as well as the module that handles that endpoint.</p>
 </td>
   
 </tr>
 <tr>
-  <td class="summary_signature"><a href="#find_files/1">find_files(path)</a></td>
+  <td class="summary_signature"><a href="#find_files/0">find_files()</a></td>
   
     <td class="summary_synopsis"><p>find_files returns a list of all the files found at the given path.</p>
 </td>
@@ -85,21 +85,19 @@
         <div id="functions_details" class="details_list">
           <h2>Functions</h2>
           <div class="detail">
-  <p class="signature" id="current_routes/1">
-    <strong>current_routes(config)</strong>
+  <p class="signature" id="current_routes/0">
+    <strong>current_routes()</strong>
   </p>
   
   <div class="docstring"><p>current_routes builds a list of tuples representing all the paths in the application as well as the module that handles that endpoint.</p>
 
-<p>The config param must have a path key which specifies where the controller files can be found.</p>
-
-<p>This function returns a list of tuples.  the tuples consist of the path, the module and the config data given to current_routes</p>
+<p>This function returns a list of tuples.  the tuples consist of the path, the module and an empty list for the initial Cowboy handler state.</p>
 </div>
   
 </div>
 <div class="detail">
-  <p class="signature" id="find_files/1">
-    <strong>find_files(path)</strong>
+  <p class="signature" id="find_files/0">
+    <strong>find_files()</strong>
   </p>
   
   <div class="docstring"><p>find_files returns a list of all the files found at the given path.</p>

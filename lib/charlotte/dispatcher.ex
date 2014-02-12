@@ -13,9 +13,7 @@ defmodule Charlotte.Dispatcher do
   @doc """
     current_routes builds a list of tuples representing all the paths in the application as well as the module that handles that endpoint.
 
-    The config param must have a path key which specifies where the controller files can be found.
-
-    This function returns a list of tuples.  the tuples consist of the path, the module and the config data given to current_routes
+    This function returns a list of tuples.  the tuples consist of the path, the module and an empty list for the initial Cowboy handler state.
   """
   def current_routes do
     controllers = find_files |> load_controllers

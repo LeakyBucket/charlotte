@@ -50,7 +50,7 @@ defmodule Charlotte do
   end
 
   defp start_config(defaults // []) do
-    EnvConf.Supervisor.start_link(defaults)
+    EnvConf.start([], defaults)
   end
 
   # Setup lager for our purposes.
