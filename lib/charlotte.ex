@@ -40,9 +40,9 @@ defmodule Charlotte do
 
   # See http://elixir-lang.org/docs/stable/Application.Behaviour.html
   # for more information on OTP Applications
-  def start(_type, _args) do
+  def start(_type, args) do
     # TODO: Pass any defaults from the config file.
-    start_config
+    start_config(args[:default_config])
     Charlotte.Webserver.start
     start_logging
 
