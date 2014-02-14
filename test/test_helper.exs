@@ -1,6 +1,7 @@
 Amrita.start
 
 System.put_env("CHARLOTTE_CONTROLLER_PATH", __DIR__ <> "/controllers")
+System.put_env("CHARLOTTE_VIEW_PATH", __DIR__ <> "/views")
 System.put_env("CHARLOTTE_HOST", "localhost")
 System.put_env("CHARLOTTE_PROTOCOL", "tcp")
 System.put_env("CHARLOTTE_ACCEPTORS", "100")

@@ -29,7 +29,7 @@ defmodule Charlotte.Webserver do
     :cowboy_router.compile([{EnvConf.Server.get("CHARLOTTE_HOST"), Charlotte.Dispatcher.current_routes}])
   end
 
-  # Start the webserver, the default is Cowboy.
+  # Start the webserver.
   defp start_server(router) do
     {acceptors, compress, port, cacert, cert, key} = build_start_args
 
