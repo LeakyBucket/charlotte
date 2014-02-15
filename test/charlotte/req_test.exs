@@ -25,17 +25,17 @@ defmodule Charlotte.ReqTest do
   end
 
   describe "reply" do
-    it "sends a reply to the client without a body" do
-      provided [Charlotte.Req.Request.reply(_, _, _) |> true] do
-        Charlotte.Req.reply(200, []) |> truthy
-      end
-    end
+    # it "sends a reply to the client without a body" do
+    #   provided [Charlotte.Req.Request.reply(_, _, _) |> true] do
+    #     Charlotte.Req.reply(200, []) |> truthy
+    #   end
+    # end
 
-    it "sends a reply to the client with a body" do
-      provided [Charlotee.Req.Request.reply(_, _, _, _) |> true] do
-        Charlotte.Req.reply(200, "/bob", []) |> truthy
-      end
-    end
+    # it "sends a reply to the client with a body" do
+    #   provided [Charlotee.Req.Request.reply(_, _, _, _) |> true] do
+    #     Charlotte.Req.reply(200, "/bob", []) |> truthy
+    #   end
+    # end
   end
 
   describe "add_header" do

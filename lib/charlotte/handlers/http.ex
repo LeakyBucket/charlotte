@@ -52,7 +52,7 @@ defmodule Charlotte.Handlers.HTTP do
       end
 
       defp render(status // 200, bindings, conn) do
-        body = Charlotte.View.Renderer.render(__MODULE__, find_action(conn.path), bindings, @layout)
+        body = Charlotte.Views.Renderer.render(__MODULE__, find_action(conn.path), bindings, @layout)
         conn = conn |> Charlotte.Req.add_header {"content-type", "text/html"}
 
         Charlotte.Req.reply(status, body, conn)
