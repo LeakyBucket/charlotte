@@ -17,8 +17,8 @@ defmodule Charlotte.Handlers.HTTP do
 
     setup also adds three convenience functions for crafting responses for the client:  
 
-    * render(status // 200, bindings, conn)  
-    * redirect(status // 302, conn)  
+    * render(status \\ 200, bindings, conn)  
+    * redirect(status \\ 302, conn)  
     * forbidden(conn)  
   """
   defmacro __using__(_args) do
@@ -26,7 +26,7 @@ defmodule Charlotte.Handlers.HTTP do
       @layout nil
 
       def init({:tcp, :http}, req, config) do
-        {:ok, req, config[:protocol]}
+        {:ok, req, config}
       end
 
       def handle(req, state) do
@@ -51,14 +51,14 @@ defmodule Charlotte.Handlers.HTTP do
         action
       end
 
-      defp render(status // 200, bindings, conn) do
+      defp render(status \\ 200, bindings, conn) do
         body = Charlotte.Views.Renderer.render(__MODULE__, find_action(conn.path), bindings, @layout)
         conn = conn |> Charlotte.Req.add_header {"content-type", "text/html"}
 
         Charlotte.Req.reply(status, body, conn)
       end
 
-      defp redirect(status // 302, conn), do: Charlotte.Req.reply(status, conn)
+      defp redirect(status \\ 302, conn), do: Charlotte.Req.reply(status, conn)
       defp forbidden(conn), do: Charlotte.Req.reply(403, conn)
     end  
   end

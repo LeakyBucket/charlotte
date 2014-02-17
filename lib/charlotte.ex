@@ -49,7 +49,7 @@ defmodule Charlotte do
     Charlotte.Supervisor.start_link
   end
 
-  defp start_config(defaults // []) do
+  defp start_config(defaults \\ []) do
     EnvConf.start([], defaults)
   end
 

@@ -15,7 +15,7 @@ defmodule Charlotte.Handlers.HTTPTest do
 
   describe "setup" do
     it "Adds the init callback for Cowboy" do
-      FakeController.init({:tcp, :http}, [], [protocol: :tcp]) |> equals {:ok, [], :tcp}
+      FakeController.init({:tcp, :http}, [], []) |> equals {:ok, [], []}
     end
 
     # it "Adds the handle callback for Cowboy" do

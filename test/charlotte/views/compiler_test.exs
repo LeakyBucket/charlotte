@@ -46,7 +46,7 @@ defmodule Charlotte.Views.CompilerTest do
     #TODO: Handle new views
   end
 
-  defp test_view_path, do: Path.join([__DIR__, "../../views"]) |> Path.expand
+  defp test_view_path, do: EnvConf.Server.get("CHARLOTTE_VIEW_PATH") |> Path.expand
   defp original_content(view), do: File.read!(view)
   defp write_to_file(file, content), do: File.write(file, content)
 end

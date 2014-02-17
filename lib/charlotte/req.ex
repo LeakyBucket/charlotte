@@ -80,6 +80,26 @@ defmodule Charlotte.Req do
   def reply(status, conn), do: Request.reply(status, conn.headers, conn.req)
   def reply(status, body, conn), do: Request.reply(status, conn.headers, body, conn.req)
   
+  @doc """
+    Send a file back to the client.  
+
+    send_file takes the absolute path to the file and the Charlotte.Req.Conn Record for the current request.
+  """
+  def send_file(absolute_path, conn) do
+    file_fun = fn(socket, transport) ->
+                 transport.sendfile(socket, absolute_path)
+               end
+
+    Request.set_resp_body_fun(file_size(absolute_path), file_fun, conn.req)
+  end
+  
+  # Get the file size for Cowboy
+  defp file_size(path) do
+    {:ok, stats} = File.stat path
+
+    stats.size
+  end
+
   # Set the scheme on the conn record
   defp scheme(:ssl), do: :https
   defp scheme(_), do: :http

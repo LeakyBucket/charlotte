@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Charlotte.Views.Assets</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+    <script type="text/javascript" charset="utf-8">
+      relpath = '';
+      if (relpath != '') relpath += '/';
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+
+    <div id="content">
+      <h1>
+        Charlotte.Views.Assets
+        
+      </h1>
+
+      
+        <div id="moduledoc" class="docstring">
+          <p>The Views.Assets module handles the rendering of any assets in the application.  By default any files in <APP_ROOT>/public/assets will be rendered by this view module.  </p>
+
+<p>The Assets module currently does not perform any kind of interpolation inside view files.  </p>
+
+<p>The Assets module is not responsible for setting the proper Mime Type on the response.  That is handled by the Assets Controller.  Keep this in mind if you call this module directly for whatever reason.</p>
+
+        </div>
+      
+
+      
+
+      
+
+      
+        <h2 id="functions_summary">Functions summary</h2>
+        <table class="summary">
+          <tr>
+  <td class="summary_signature"><a href="#render/1">render(file)</a></td>
+  
+    <td class="summary_synopsis"><p>render returns the contents of  /<CHARLOTTE_ASSET_PATH>/<file></p>
+</td>
+  
+</tr>
+
+        </table>
+      
+
+      
+
+      
+
+      
+
+      
+        <div id="functions_details" class="details_list">
+          <h2>Functions</h2>
+          <div class="detail">
+  <p class="signature" id="render/1">
+    <strong>render(file)</strong>
+  </p>
+  
+  <div class="docstring"><p>render returns the contents of  /<CHARLOTTE_ASSET_PATH>/<file></p>
+</div>
+  
+</div>
+
+        </div>
+      
+
+      
+
+      
+    </div>
+  </body>
+</html>

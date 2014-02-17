@@ -62,7 +62,6 @@ defmodule Charlotte.Views.Compiler do
     path |> gather_views |> view_dict
   end
 
-  # Assuming .eex extension on all views
   # TODO: Break into separate functions?
   defp gather_views(path) do
     {:ok, contents} = File.ls(path)

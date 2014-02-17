@@ -14,11 +14,10 @@ defmodule Charlotte.DispatcherTest do
   end
 
   test "it loads the files in the list" do
-    path = Path.expand(File.cwd! <> "/test/support")
-    file = path <> "/config.exs"
+    file = controller_dir <> "/bob.exs"
 
-    Charlotte.Dispatcher.load_controllers([file]) |> equals [Config]
+    Charlotte.Dispatcher.load_controllers([file]) |> equals [Bob]
   end
 
-  defp controller_dir, do: File.cwd! <> "/test/controllers"
+  defp controller_dir, do: EnvConf.Server.get "CHARLOTTE_CONTROLLER_PATH"
 end
