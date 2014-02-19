@@ -26,7 +26,7 @@ defmodule Charlotte.Dispatcher do
                      end) ++ acc
                    end
 
-    Enum.reduce controllers, [], path_builder
+    Enum.reduce(controllers, [], path_builder) |> add_assets
   end
 
   @doc """
@@ -62,4 +62,7 @@ defmodule Charlotte.Dispatcher do
 
     Enum.reduce mod_list, [], mod_extract
   end
+
+  # Add the internal Assets controller to the dispatch list.
+  defp add_assets(dispatch_list), do: [{"/assets/[...]", Charlotte.Controllers.Assets, []}] ++ dispatch_list
 end

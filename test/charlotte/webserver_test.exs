@@ -6,6 +6,6 @@ defmodule Charlotte.WebserverTest do
   end
 
   test "it compiles the routes" do
-    Charlotte.Webserver.compile_routes |> equals [{["localhost"], [], [{[], [], Root, []}, {["bobby"], [], Bob, []}, {["bob"], [], Bob, []}]}]
+    Charlotte.Webserver.compile_routes |> equals [{["localhost"], [], [{["assets", :...], [], Charlotte.Controllers.Assets, []}, {[], [], Root, []}, {["bobby"], [], Bob, []}, {["bob"], [], Bob, []}]}]
   end
 end
