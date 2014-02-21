@@ -43,8 +43,10 @@ defmodule Charlotte do
   def start(_type, args) do
     # TODO: Pass any defaults from the config file.
     start_config(args[:default_config])
-    Charlotte.Webserver.start
     start_logging
+
+    Charlotte.Views.Compiler.compile Mix.env
+    Charlotte.Webserver.start
 
     Charlotte.Supervisor.start_link
   end
@@ -57,10 +59,7 @@ defmodule Charlotte do
   defp start_logging do
     set_lager_env
 
-    :ok = :application.start(:compiler)
-    :ok = :application.start(:syntax_tools)
-    :ok = :application.start(:goldrush)
-    :ok = :application.start(:lager)
+    lc component inlist [:compiler, :syntax_tools, :goldrush, :lager], do: :ok = :application.start(component)
   end
 
   defp set_lager_env do
