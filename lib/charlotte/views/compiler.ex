@@ -40,7 +40,7 @@ defmodule Charlotte.Views.Compiler do
 
     If the env param is "dev" or "development" then the View module will load the View on every request.  Otherwise the view will be compiled ahead of time.
   """
-  def compile(env) when env in ["dev", "development"] do
+  def compile(env) when env in [:dev, :development] do
     path = EnvConf.Server.get("CHARLOTTE_VIEW_PATH")
 
     Enum.reduce comp_dict(path), [], fn(view, acc) ->

@@ -5,7 +5,7 @@ defmodule Charlotte.Views.CompilerTest do
 
   describe "Production" do
     it "renders the view" do
-      Charlotte.Views.Compiler.compile "production"
+      Charlotte.Views.Compiler.compile :production
 
       Charlotte.Views.FakeController.new([pants: "Wearing them"]) |> equals "Wearing them\n"
     end
@@ -13,7 +13,7 @@ defmodule Charlotte.Views.CompilerTest do
     it "doesn't render changes to view after compilation" do
       view = test_view_path <> "/fake_controller/new.eex"
       content = original_content(view)
-      Charlotte.Views.Compiler.compile "production"
+      Charlotte.Views.Compiler.compile :production
 
       write_to_file view, (content <> "<%= @lou %>")
 
@@ -25,7 +25,7 @@ defmodule Charlotte.Views.CompilerTest do
 
   describe "Non-Production" do
     it "renders the view" do
-      Charlotte.Views.Compiler.compile "development"
+      Charlotte.Views.Compiler.compile :development
 
       Charlotte.Views.FakeController.new([pants: "Ooops!"]) |> equals "Ooops!\n"
     end
@@ -34,7 +34,7 @@ defmodule Charlotte.Views.CompilerTest do
       view = test_view_path <> "/fake_controller/new.eex"
       content = original_content(view)
 
-      Charlotte.Views.Compiler.compile "development"
+      Charlotte.Views.Compiler.compile :development
 
       write_to_file view, (content <> "<%= @lou %>")
 
