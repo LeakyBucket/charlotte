@@ -26,10 +26,14 @@ defmodule Charlotte.Handlers.HTTP do
       @layout nil
 
       def init({:tcp, :http}, req, config) do
+        IO.puts "In init"
+
         {:ok, req, config}
       end
 
       def handle(req, state) do
+        IO.puts "In handle"
+        
         conn = Charlotte.Req.build_conn req, state
         action = find_action(conn.path)
 
