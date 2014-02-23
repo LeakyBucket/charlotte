@@ -1,13 +1,14 @@
 defmodule Charlotte.Controllers.Assets do
   @moduledoc """
-    The Assets Controller handles all requests for /assets/*
+    The Assets Controller handles all requests for /assets/*  
 
-    It it responsible for setting the appropriate Mime Type and sending the response.  Charlotte.Views.Assets is responsible for retrieving the actual content of the requested file.  
+    It also handles the favicon.  
   """
 
   def routes do
     [
-      {"/assets/[...]", :handle}
+      {"/assets/[...]", :send_asset},
+      {"/favicon.ico", :send_favicon}
     ]
   end
 
@@ -16,6 +17,10 @@ defmodule Charlotte.Controllers.Assets do
   end
 
   def handle(req, state) do
+    Kernel.apply(__MODULE__, routes[req.path], [req])
+  end
+
+  def send_asset(req) do
     {asset, req} = req.path_info
     asset = asset_path(asset)
 
@@ -23,14 +28,24 @@ defmodule Charlotte.Controllers.Assets do
                    transport.sendfile(socket, asset)
                  end
 
-    :cowboy_req.set_resp_body_fun(asset_size(asset), asset_send, req)
+    :cowboy_req.set_resp_body_fun(file_size(asset), asset_send, req)
   end
 
+  def send_favicon(req) do
+    icon = asset_path("/favicon.ico")
+
+    icon_send = fn(socket, transport) ->
+                  transport.sendfile(socket, icon)
+                end
+
+    :cowboy_req.set_resp_body_fun(file_size(icon), icon_send, req)
+  end
+  
   def terminate(_reason, _req, _state) do
     :ok
   end
 
-  defp asset_size(resource) do
+  defp file_size(resource) do
     {:ok, stats} = File.stat resource
 
     stats.size
