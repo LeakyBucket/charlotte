@@ -14,7 +14,7 @@ That's a good question.  When I first started playing with Elixir there weren't 
 
 ## Short How
 
-The quickest way to get started is to add Charlotte as a dependency to your project.
+<!-- The quickest way to get started is to add Charlotte as a dependency to your project.
 
 ```elixir
   { :charlotte, github: "LeakyBucket/charlotte" }
@@ -37,7 +37,7 @@ There are a few different environment variables that Charlotte expects.  These c
   ])
 
   Charlotte.start [], [default_config: default_config]
-```
+``` -->
 
 ## Long How
 
