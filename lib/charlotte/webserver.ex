@@ -26,7 +26,9 @@ defmodule Charlotte.Webserver do
     Compile new routes.  Routes will be read from current controllers.
   """
   def compile_routes do
-    :cowboy_router.compile([{EnvConf.Server.get("CHARLOTTE_HOST"), Charlotte.Dispatcher.current_routes}])
+    host = bitstring_to_list EnvConf.Server.get("CHARLOTTE_HOST")
+
+    :cowboy_router.compile([{host, Charlotte.Dispatcher.current_routes}])
   end
 
   # Start the webserver.

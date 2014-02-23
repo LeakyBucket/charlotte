@@ -22,7 +22,7 @@ defmodule Charlotte.Dispatcher do
     path_builder = fn(mod, acc) ->
                      Enum.reduce(mod.routes, [], fn(route, acc) ->
                        {path, _} = route
-                       [{path, mod, []}] ++ acc
+                       [{bitstring_to_list(path), mod, []}] ++ acc
                      end) ++ acc
                    end
 
@@ -64,5 +64,5 @@ defmodule Charlotte.Dispatcher do
   end
 
   # Add the internal Assets controller to the dispatch list.
-  defp add_assets(dispatch_list), do: [{"/assets/[...]", Charlotte.Controllers.Assets, []}] ++ dispatch_list
+  defp add_assets(dispatch_list), do: [{'/assets/[...]', Charlotte.Controllers.Assets, []}] ++ dispatch_list
 end
