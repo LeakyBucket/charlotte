@@ -23,8 +23,10 @@ defmodule Charlotte.Views.Renderer do
   @doc """
     Render the specified view.  If a template is specified then the view content is injected into the @content tag in the layout.  Render always returns a binary.
   """
-  def render(view_mod, view, bindings, template) when template == nil do
-    view_content(view_mod, view, bindings)
+  def render(controller_mod, view, bindings, template) when template == nil do
+    mod = view_mod(controller_mod)
+
+    view_content(mod, view, bindings)
   end
   def render(view_mod, view, bindings, template) do
     view_content(view_mod, view, bindings) |> render_template(template)
@@ -36,5 +38,11 @@ defmodule Charlotte.Views.Renderer do
 
   defp view_content(mod, action, bindings) do
     Kernel.apply(mod, action, [bindings])
+  end
+
+  defp view_mod(mod) do
+    mod = mod |> Module.split |> List.last
+
+    Module.concat [Charlotte, Views, mod]
   end
 end
