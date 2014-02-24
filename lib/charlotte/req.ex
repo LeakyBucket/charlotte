@@ -34,7 +34,7 @@ defmodule Charlotte.Req do
     {headers, req} = Request.headers req
     {params, req} = Request.qs_vals req
     {bindings, req} = Request.bindings req
-    {body_qs, req} = Request.body_qs req
+    {:ok, body_qs, req} = Request.body_qs req
 
     params = bindings ++ body_qs ++ params
 
