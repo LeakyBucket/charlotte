@@ -35,6 +35,8 @@ defmodule Charlotte.Handlers.HTTP do
 
         # Invoke the proper action for the path
         Kernel.apply(__MODULE__, action, [conn.verb, conn.params, conn])
+
+        {:ok, req, state}
       end
 
       def terminate(_reason, _req, _state) do
