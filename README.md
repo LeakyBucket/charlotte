@@ -12,7 +12,7 @@ That's a good question.  When I first started playing with Elixir there weren't 
 
 ## Short How
 
-<!-- The quickest way to get started is to add Charlotte as a dependency to your project.
+The quickest way to get started is to add Charlotte as a dependency to your project.
 
 ```elixir
   { :charlotte, github: "LeakyBucket/charlotte" }
@@ -35,7 +35,11 @@ There are a few different environment variables that Charlotte expects.  These c
   ])
 
   Charlotte.start [], [default_config: default_config]
-``` -->
+```
+
+#### Note
+
+There are currently issues when using Chrome.  As the favicon isn't served up properly yet Chrome aborts the whole request when it gets the 400 response for the favicon.  Firefox doesn't behave in this manner and should work fine.
 
 ## Long How
 
