@@ -4,7 +4,7 @@ defmodule :cowboy_req do
   def headers(_), do: {"", []}
   def qs_vals(_), do: {[{"cat", "meow"}], []}
   def bindings(_), do: {[{:dog, "woof"}], []}
-  def body_qs(_), do: {[{"fish", "glug"}], []}
+  def body_qs(_), do: {:ok, [{"fish", "glug"}], []}
 end
 
 defmodule Charlotte.ReqTest do

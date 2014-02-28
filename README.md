@@ -1,6 +1,4 @@
-# Charlotte
-
-[![Gitter chat](https://badges.gitter.im/LeakyBucket/charlotte.png)](https://gitter.im/LeakyBucket/charlotte)
+# Charlotte [![Gitter chat](https://badges.gitter.im/LeakyBucket/charlotte.png)](https://gitter.im/LeakyBucket/charlotte)
 
 These are pretty sparse for now but should get better soon.
 
