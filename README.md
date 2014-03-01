@@ -39,7 +39,7 @@ There are a few different environment variables that Charlotte expects.  These c
 
 #### Note
 
-There are currently issues when using Chrome.  As the favicon isn't served up properly yet Chrome aborts the whole request when it gets the 400 response for the favicon.  Firefox doesn't behave in this manner and should work fine.
+There are currently issues when using Chrome.  Any request appears to generate a 400 response.  I'm not sure why yet.  Any insight would be appreciated.  Firefox appears to work fine.
 
 ## Long How
 
