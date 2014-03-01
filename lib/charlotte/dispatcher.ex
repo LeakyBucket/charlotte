@@ -64,6 +64,5 @@ defmodule Charlotte.Dispatcher do
   end
 
   # Add the internal Assets controller to the dispatch list.
-  #defp add_assets(dispatch_list), do: [{'assets/[...]', :cowboy_static, [{:directory, {:priv_dir, :my_app, []}]}, {'/favicon.ico', :cowboy_static, [{:directory, {:priv_dir, :my_app, []}}, {:file, "favicon.ico"}]}]
-  defp add_assets(dispatch_list), do: [{'/assets/[...]', Charlotte.Controllers.Assets, []}, {'/favicon.ico', Charlotte.Controllers.Assets, []}] ++ dispatch_list
+  defp add_assets(dispatch_list), do: [{'/favicon.ico', :cowboy_static, {:file, EnvConf.Server.get("CHARLOTTE_ASSET_PATH") <> "/favicon.ico"}}, {'/assets/[...]', :cowboy_static, {:dir, EnvConf.Server.get("CHARLOTTE_ASSET_PATH")}}] ++ dispatch_list
 end

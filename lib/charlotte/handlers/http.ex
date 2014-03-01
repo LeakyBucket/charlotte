@@ -44,13 +44,7 @@ defmodule Charlotte.Handlers.HTTP do
       end
 
       defp find_action(path) do
-        IO.puts path
-        {relative, action} = Enum.find routes, fn(x) ->
-                                                 {rel, action} = x
-                                                 rel == path
-                                               end
-
-        action
+        routes[path]
       end
 
       defp render(status \\ 200, bindings, conn) do
