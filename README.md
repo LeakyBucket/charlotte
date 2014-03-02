@@ -153,12 +153,12 @@ Views in Charlotte are organized similarly to Views in Rails.  The view files fo
 The above structure would result in the following code being generated:  
 
 * Charlotte.Views.Users
-** show/1
-** new/1
+  * show/1
+  * new/1
 * Charlotte.Views.Fees
-** list/1
+  * list/1
 * Charlotte.Views.Locations
-** new/1  
+  * new/1  
 
 These are public functions and can be called from any where at any time.  However the render function which is injected by the HTTP Handler will look them up and call the appropriate function.
 
@@ -175,3 +175,41 @@ When you are running your application in development views will be read from the
 There are plans to build a default URL that when requested will cause a recompile of all Views.  
 
 Charlotte currently doesn't have any helpers for link generation.  This is planned for the future.  
+
+### Configuration
+
+A brief word on configuration.  Charlotte is built to use a [12 Factor](http://12factor.net/config) approach to configuration.  
+
+With this in mind the framework it's self expects a few configuration variables to be present:  
+
+* CHARLOTTE_CONTROLLER_PATH
+* CHARLOTTE_VIEW_PATH
+* CHARLOTTE_ASSET_PATH
+* CHARLOTTE_HOST
+* CHARLOTTE_PROTOCOL
+* CHARLOTTE_ACCEPTORS
+* CHARLOTTE_COMPRESS
+* CHARLOTTE_PORT  
+
+Charlotte uses [EnvConf](https://github.com/LeakyBucket/env_conf) to manage configuration settings, this also allows you to use the same in your application without any additional setup.  
+
+It is possible to send defaults when starting Charlotte from your application module:  
+
+```elixir
+  default_config = HashDict.new([
+    {"CHARLOTTE_CONTROLLER_PATH", __DIR__ <> "/support/controllers"},
+    {"CHARLOTTE_VIEW_PATH", __DIR__ <> "/support/views"},
+    {"CHARLOTTE_ASSET_PATH", __DIR__ <> "/support/assets"},
+    {"CHARLOTTE_HOST", "localhost"},
+    {"CHARLOTTE_PROTOCOL", "tcp"},
+    {"CHARLOTTE_ACCEPTORS", "100"},
+    {"CHARLOTTE_COMPRESS", "false"},
+    {"CHARLOTTE_PORT", "8000"}
+  ])
+
+  Charlotte.start([], [default_config: default_config])
+```  
+
+You can store/build these defaults however you wish.  All Charlotte cares about is that they are given as a HashDict.
+
+EnvConf will not overwrite any values that are already present in the environment so it is safe to leave dev defaults in your code.  They won't overwrite configuration set in the environment directly on a production system.
