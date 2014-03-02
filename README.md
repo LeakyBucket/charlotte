@@ -166,7 +166,7 @@ These are public functions and can be called from any where at any time.  Howeve
 
 Views are rendered by EEx.  Any assigned variables should be preceeded by an @  
 
-```elixir
+```erb
   Your name is <%= @name %>
 ```
 
