@@ -19,7 +19,7 @@ defmodule Charlotte.Mixfile do
     ]
   end
 
-  
+
   defp deps do
     [ {:cowboy, "~> 1.0.0"},
       {:plug, "~> 0.5.2"},

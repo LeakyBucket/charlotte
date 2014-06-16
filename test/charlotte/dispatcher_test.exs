@@ -5,7 +5,7 @@ defmodule Charlotte.DispatcherTest do
   it "builds a list of routes and handlers" do
     route_list = Charlotte.Dispatcher.current_routes
 
-    assert [{'/favicon.ico', :cowboy_static, {:file, EnvConf.Server.get("CHARLOTTE_ASSET_PATH") <> "/favicon.ico"}}, {'/assets/[...]', :cowboy_static, {:dir, EnvConf.Server.get("CHARLOTTE_ASSET_PATH")}}, {'/', Root, []}, {'/bobby', Bob, []}, {'/bob', Bob, []}] == route_list
+    assert [{'/[...]', Charlotte.Controllers.NotFound, []}, {'/favicon.ico', :cowboy_static, {:file, EnvConf.Server.get("CHARLOTTE_ASSET_PATH") <> "/favicon.ico"}}, {'/assets/[...]', :cowboy_static, {:dir, EnvConf.Server.get("CHARLOTTE_ASSET_PATH")}}, {'/', Root, []}, {'/bobby', Bob, []}, {'/bob', Bob, []}] == route_list
   end
 
   it "finds the files at the given location" do

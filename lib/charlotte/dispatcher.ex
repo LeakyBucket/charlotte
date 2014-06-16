@@ -26,7 +26,7 @@ defmodule Charlotte.Dispatcher do
                      end) ++ acc
                    end
 
-    Enum.reduce(controllers, [], path_builder) |> add_assets
+    Enum.reduce(controllers, [], path_builder) |> add_assets |> add_404
   end
 
   @doc """
@@ -65,4 +65,7 @@ defmodule Charlotte.Dispatcher do
 
   # Add the internal Assets controller to the dispatch list.
   defp add_assets(dispatch_list), do: [{'/favicon.ico', :cowboy_static, {:file, EnvConf.Server.get("CHARLOTTE_ASSET_PATH") <> "/favicon.ico"}}, {'/assets/[...]', :cowboy_static, {:dir, EnvConf.Server.get("CHARLOTTE_ASSET_PATH")}}] ++ dispatch_list
+
+  # Add the 404 handler to the root of the dispatch list.
+  defp add_404(dispatch_list), do: [{'/[...]', Charlotte.Controllers.NotFound, []}] ++ dispatch_list
 end

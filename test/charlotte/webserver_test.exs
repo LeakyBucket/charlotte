@@ -7,6 +7,6 @@ defmodule Charlotte.WebserverTest do
   end
 
   test "it compiles the routes" do
-    assert [{["localhost"], [], [{["favicon.ico"], [], :cowboy_static, {:file, EnvConf.Server.get("CHARLOTTE_ASSET_PATH") <> "/favicon.ico"}}, {["assets", :...], [], :cowboy_static, {:dir, EnvConf.Server.get("CHARLOTTE_ASSET_PATH")}}, {[], [], Root, []}, {["bobby"], [], Bob, []}, {["bob"], [], Bob, []}]}] == Charlotte.Webserver.compile_routes
+    assert [{["localhost"], [], [{[:...], [], Charlotte.Controllers.NotFound, []}, {["favicon.ico"], [], :cowboy_static, {:file, EnvConf.Server.get("CHARLOTTE_ASSET_PATH") <> "/favicon.ico"}}, {["assets", :...], [], :cowboy_static, {:dir, EnvConf.Server.get("CHARLOTTE_ASSET_PATH")}}, {[], [], Root, []}, {["bobby"], [], Bob, []}, {["bob"], [], Bob, []}]}] == Charlotte.Webserver.compile_routes
   end
 end
