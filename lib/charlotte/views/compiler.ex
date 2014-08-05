@@ -1,10 +1,10 @@
 defmodule Charlotte.Views.Compiler do
   @moduledoc """
-    The Views Compiler builds view modules for all the view files found at the specified path.  
+    The Views Compiler builds view modules for all the view files found at the specified path.
 
-    During development the views will interpret the file on each render.  Otherwise the views will be read and converted into functions via the EEx function_from_file macro. 
+    During development the views will interpret the file on each render.  Otherwise the views will be read and converted into functions via the EEx function_from_file macro.
 
-    The Views Compiler assumes that Views live in subdirectories at the given root path.  The first directory off the root is considered to be the controller name.  
+    The Views Compiler assumes that Views live in subdirectories at the given root path.  The first directory off the root is considered to be the controller name.
     The filename is assumed to be the action name.
 
     For example:
@@ -17,8 +17,8 @@ defmodule Charlotte.Views.Compiler do
         - special_needs
           - show.eex
           - new.eex
-          - create.eex 
-    ``` 
+          - create.eex
+    ```
 
     The above structure would result in the following Modules:
 
@@ -36,7 +36,7 @@ defmodule Charlotte.Views.Compiler do
   """
 
   @doc """
-    Compile the views found at path.  
+    Compile the views found at path.
 
     If the env param is "dev" or "development" then the View module will load the View on every request.  Otherwise the view will be compiled ahead of time.
   """
@@ -71,7 +71,7 @@ defmodule Charlotte.Views.Compiler do
                                 if File.dir?(target) do
                                   gather_views(target) ++ acc
                                 else
-                                  [target] ++ acc 
+                                  [target] ++ acc
                                 end
                               end
   end
@@ -98,7 +98,7 @@ defmodule Charlotte.Views.Compiler do
   end
 
   defp action(file) do
-    String.split(file, "/") |> List.last |> String.split(".") |> List.first |> binary_to_atom
+    String.split(file, "/") |> List.last |> String.split(".") |> List.first |> String.to_atom
   end
 
   # Compile the view for production

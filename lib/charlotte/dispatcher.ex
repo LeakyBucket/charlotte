@@ -1,12 +1,12 @@
 defmodule Charlotte.Dispatcher do
   @moduledoc """
-    The functions in Charlotte.Dispatcher are intended for building a proper structure for Cowboy's routing.  
+    The functions in Charlotte.Dispatcher are intended for building a proper structure for Cowboy's routing.
 
-    The functions in Charlotte.Dispatcher make a few assumptions about the structure of the underlying application.  
+    The functions in Charlotte.Dispatcher make a few assumptions about the structure of the underlying application.
 
-    * All controllers are assumed to be at the given path.  
-    * Each controller module must contain a routes function.  
-      * routes must return a list of tuples in the form of {path, action}  
+    * All controllers are assumed to be at the given path.
+    * Each controller module must contain a routes function.
+      * routes must return a list of tuples in the form of {path, action}
 
   """
 
@@ -22,7 +22,7 @@ defmodule Charlotte.Dispatcher do
     path_builder = fn(mod, acc) ->
                      Enum.reduce(mod.routes, [], fn(route, acc) ->
                        {path, _} = route
-                       [{bitstring_to_list(path), mod, []}] ++ acc
+                       [{:erlang.bitstring_to_list(path), mod, []}] ++ acc
                      end) ++ acc
                    end
 
@@ -47,8 +47,8 @@ defmodule Charlotte.Dispatcher do
     location = EnvConf.Server.get "CHARLOTTE_CONTROLLER_PATH"
     {:ok, files} = File.ls location
 
-    Enum.reduce files, [], fn(file, acc) -> 
-                             [Path.join(location, file)] ++ acc 
+    Enum.reduce files, [], fn(file, acc) ->
+                             [Path.join(location, file)] ++ acc
                            end
   end
 

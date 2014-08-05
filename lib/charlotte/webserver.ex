@@ -7,7 +7,7 @@ defmodule Charlotte.Webserver do
     Start the Cowboy webserver with the given configuration.
   """
   def start do
-    lc component inlist [:crypto, :public_key, :ssl, :mimetypes, :ranch, :cowlib, :cowboy], do: :application.start component
+    for component <- [:crypto, :public_key, :ssl, :mimetypes, :ranch, :cowlib, :cowboy], do: :application.start component
 
     router = compile_routes
 
@@ -26,7 +26,7 @@ defmodule Charlotte.Webserver do
     Compile new routes.  Routes will be read from current controllers.
   """
   def compile_routes do
-    host = bitstring_to_list EnvConf.Server.get("CHARLOTTE_HOST")
+    host = :erlang.bitstring_to_list EnvConf.Server.get("CHARLOTTE_HOST")
 
     :cowboy_router.compile([{host, Charlotte.Dispatcher.current_routes}])
   end

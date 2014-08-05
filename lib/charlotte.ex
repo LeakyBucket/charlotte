@@ -1,14 +1,14 @@
 defmodule Charlotte do
   @moduledoc """
-    Charlotte is an Elixir Web Framework.  It is inspired by both Rails and Sinatra.  
+    Charlotte is an Elixir Web Framework.  It is inspired by both Rails and Sinatra.
 
-    Charlotte doesn't come with any particular ORM nor does it expect you to use one.  That doesn't mean you can't and it also means you can use whichever you want.  
+    Charlotte doesn't come with any particular ORM nor does it expect you to use one.  That doesn't mean you can't and it also means you can use whichever you want.
 
-    Charlotte does expect you to use the Cowboy webserver.  We may branch out to others in the future but the current architecture closely reflects Cowboy's structure and behaviors.   
+    Charlotte does expect you to use the Cowboy webserver.  We may branch out to others in the future but the current architecture closely reflects Cowboy's structure and behaviors.
 
-    In Charlotte your controllers define both your request handling and your application routing.  Charlote will read the routes defined in each controller and dispatch requests for those routes to the specified action.  
+    In Charlotte your controllers define both your request handling and your application routing.  Charlote will read the routes defined in each controller and dispatch requests for those routes to the specified action.
 
-    For example:  
+    For example:
 
     ```
     defmodule MyController do
@@ -22,11 +22,11 @@ defmodule Charlotte do
       end
 
       def action1(verb, params, conn) do
-        
+
       end
-      
+
       def action2(verb, params, conn) do
-        
+
       end
     end
     ```
@@ -36,14 +36,13 @@ defmodule Charlotte do
     This is different from most other routing configurations out there but we feel it allows for a nice encapsulation of expression.
   """
 
-  use Application.Behaviour
+  use Application
 
   # See http://elixir-lang.org/docs/stable/Application.Behaviour.html
   # for more information on OTP Applications
   def start(_type, args) do
     # TODO: Pass any defaults from the config file.
     start_config(args[:default_config])
-    start_logging
 
     Charlotte.Views.Compiler.compile Mix.env
     Charlotte.Webserver.start
@@ -54,20 +53,4 @@ defmodule Charlotte do
   defp start_config(defaults \\ []) do
     EnvConf.start([], defaults)
   end
-
-  # Setup lager for our purposes.
-  defp start_logging do
-    set_lager_env
-
-    lc component inlist [:compiler, :syntax_tools, :goldrush, :lager], do: :ok = :application.start(component)
-  end
-
-  defp set_lager_env do
-    :ok = :application.load(:lager)
-
-    :application.set_env(:lager, :handlers, lager_console_backend: log_level(Mix.env), lager_file_backend: [file: "log/#{Mix.env}.log", level: log_level(Mix.env), size: 10485760, date: '$D0', count: 5])
-  end
-
-  defp log_level(env) when env in [:prod, :production], do: :info
-  defp log_level(env), do: :debug
 end
