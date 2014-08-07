@@ -20,18 +20,30 @@
     </script>
 
     <div id="content">
+      <div class="breadcrumbs">Charlotte v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="Charlotte.html">Charlotte</a> &rarr; Handlers &rarr; <a href="Charlotte.Handlers.HTTP.html">HTTP</a></div>
+
       <h1>
         Charlotte.Handlers.HTTP
         
       </h1>
 
+      <ul class="summary_links">
+        
+          <li><a href="#summary">Summary</a></li>
+        
+        
+        
+          <li><a href="#macros_details">Macros</a></li>
+        
+        
+        
+      </ul>
+
       
         <div id="moduledoc" class="docstring">
-          <p>The HTTP Handler module provides the basic HTTP 1.1 callbacks Cowboy expects in a route handler.  </p>
-
-<p>This is important because each controller in Charlotte is treated as a Reuqest Handler for the routes it defines.  </p>
-
-<p>To build an HTTP 1.1 Controller simply require this module and call the setup macro.  Your Controller Module
+          <p>  The HTTP Handler module provides the basic HTTP 1.1 callbacks Cowboy expects in a route handler.  </p>
+<p>  This is important because each controller in Charlotte is treated as a Reuqest Handler for the routes it defines.  </p>
+<p>  To build an HTTP 1.1 Controller simply require this module and call the setup macro.  Your Controller Module
   should implement a routes method which returns a list of {path, action} tuples.</p>
 
         </div>
@@ -40,17 +52,13 @@
       
 
       
-
-      
-
-      
-        <h2 id="macros_summary">Macros summary</h2>
+        <h2 id="summary">Summary<div class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></div></h2>
         <table class="summary">
           <tr>
-  <td class="summary_signature"><a href="#__using__/1">__using__(_args)</a></td>
+  <td class="summary_signature"><a href="#__using__/1">__using__(args)</a></td>
   
     <td class="summary_synopsis"><p>Using sets up the definitions for the default init, handle and terminate callbacks.  These callbacks assume
-  the controller module API follows what is outlined in the documentation.  </p>
+  the controller module API follows what is outlined in the documentation</p>
 </td>
   
 </tr>
@@ -63,27 +71,30 @@
       
 
       
-
-      
         <div id="macros_details" class="details_list">
           <h2>Macros</h2>
           <div class="detail">
-  <p class="signature" id="__using__/1">
-    <strong>__using__(_args)</strong>
-  </p>
+  <div class="detail_header" id="__using__/1">
+    <span class="signature"><strong>__using__(args)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(macro)</span>
+      <a href="#__using__/1" class="detail_link" title="Link to this macro">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>Using sets up the definitions for the default init, handle and terminate callbacks.  These callbacks assume
+  <div class="docstring"><p>  Using sets up the definitions for the default init, handle and terminate callbacks.  These callbacks assume
   the controller module API follows what is outlined in the documentation.  </p>
-
-<p>The handle callback is the most complex behavior wise.  It builds a Charlotte.Req.Conn Record, it looks
+<p>  The handle callback is the most complex behavior wise.  It builds a Charlotte.Req.Conn Record, it looks
   up the action for the path and calls the action with the verb, params, and conn record.  </p>
-
-<p>setup also adds three convenience functions for crafting responses for the client:  </p>
-
+<p>  setup also adds three convenience functions for crafting responses for the client:  </p>
 <ul>
-<li>render(status \ 200, bindings, conn)<br></li>
-<li>redirect(status \ 302, conn)<br></li>
-<li>forbidden(conn)<br></li>
+<li>render(status \ 200, bindings, conn)  
+</li>
+<li>redirect(status \ 302, conn)  
+</li>
+<li>forbidden(conn)  
+</li>
 </ul>
 </div>
   

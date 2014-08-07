@@ -1,9 +1,10 @@
 defmodule Charlotte.Views.AssetsTest do
-  use Amrita.Sweet
+  use ExUnit.Case
+  use ExSpec
 
   describe "Rendering" do
     it "renders the requested asset" do
-      Charlotte.Views.Assets.render("hello.css") |> equals ".hello { color: green; }"
+      assert Charlotte.Views.Assets.render("hello.css") == ".hello { color: green; }"
     end
   end
 end

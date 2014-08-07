@@ -6,27 +6,7 @@ defmodule Charlotte.Req do
   require :cowboy_req, as: Request
 
   @doc """
-    The Conn organizes the data from the request.  It associates the data in a way that should be useful for a controller action.
-  """
-  defrecord Conn,
-    req: nil,
-    verb: "",
-    params: [],
-    req_headers: "",
-    headers: [],
-    path: "",
-    scheme: ""
-
-  @doc """
-    Parse the cowboy response structure and build a native Conn record.  
-
-    A Charlotte Conn Record is structured as follows:  
-
-    * verb: HTTP Verb  
-    * params: Query String and all URL Bindings  
-    * headers: Request Headers  
-    * path: The request path  
-    * scheme: :http or :https  
+    Parse the cowboy response structure and build a Charlotte.Conn record.
   """
   def build_conn(req, config) do
     {path, req} = Request.path req
@@ -38,7 +18,7 @@ defmodule Charlotte.Req do
 
     params = bindings ++ body_qs ++ params
 
-    Conn[
+    %Charlotte.Conn{
       req: req,
       verb: verb,
       params: normalize_to_atoms(params),
@@ -46,11 +26,11 @@ defmodule Charlotte.Req do
       headers: [],
       path: path,
       scheme: scheme(config[:protocol])
-    ]
+    }
   end
 
   @doc """
-    Takes a list of tuples and modifies it so that the first value in each tuple is an atom.  
+    Takes a list of tuples and modifies it so that the first value in each tuple is an atom.
   """
   def normalize_to_atoms(params) do
     Enum.reduce params, [], fn(pair, acc) ->
@@ -58,30 +38,30 @@ defmodule Charlotte.Req do
                               if is_atom(key) do
                                 [{key, value}] ++ acc
                               else
-                                [{binary_to_atom(key), value}] ++ acc
+                                [{String.to_atom(key), value}] ++ acc
                               end
                             end
   end
 
   @doc """
-    Add a new header tuple for the response.  
+    Add a new header tuple for the response.
 
-    add_header takes two arguments a Charlotte.Req.Conn record and a header tuple.  
+    add_header takes two arguments a Charlotte.Req.Conn record and a header tuple.
   """
-  def add_header(conn, header), do: conn.headers([header] ++ conn.headers)
+  def add_header(conn, header), do: %{conn | headers: [header] ++ conn.headers}
 
   @doc """
     Send the reply back to the Client.
 
     reply takes either a status and a conn record or a status, body and conn record.
-    Any specific response headers should be set on the conn record prior to calling 
-    reply.  
+    Any specific response headers should be set on the conn record prior to calling
+    reply.
   """
   def reply(status, conn), do: Request.reply(status, conn.headers, conn.req)
   def reply(status, body, conn), do: Request.reply(status, conn.headers, body, conn.req)
-  
+
   @doc """
-    Send a file back to the client.  
+    Send a file back to the client.
 
     send_file takes the absolute path to the file and the Charlotte.Req.Conn Record for the current request.
   """
@@ -92,7 +72,7 @@ defmodule Charlotte.Req do
 
     Request.set_resp_body_fun(file_size(absolute_path), file_fun, conn.req)
   end
-  
+
   # Get the file size for Cowboy
   defp file_size(path) do
     {:ok, stats} = File.stat path

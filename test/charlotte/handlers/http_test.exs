@@ -1,6 +1,6 @@
 defmodule FakeController do
   use Charlotte.Handlers.HTTP
-  
+
   def routes do
     [{"/bob", :bob}]
   end
@@ -11,11 +11,12 @@ defmodule FakeController do
 end
 
 defmodule Charlotte.Handlers.HTTPTest do
-  use Amrita.Sweet
+  use ExUnit.Case
+  use ExSpec
 
   describe "setup" do
     it "Adds the init callback for Cowboy" do
-      FakeController.init({:tcp, :http}, [], []) |> equals {:ok, [], []}
+      assert FakeController.init({:tcp, :http}, [], []) == {:ok, [], []}
     end
 
     # it "Adds the handle callback for Cowboy" do
@@ -23,7 +24,7 @@ defmodule Charlotte.Handlers.HTTPTest do
     # end
 
     it "Adds the terminate callback for Cowboy" do
-      FakeController.terminate([], [], []) |> equals :ok
+      assert FakeController.terminate([], [], []) == :ok
     end
 
     # it "Adds the render function" do

@@ -7,15 +7,16 @@ defmodule Charlotte.Views.Test do
 end
 
 defmodule Charlotte.Views.RendererTest do
-  use Amrita.Sweet
+  use ExUnit.Case
+  use ExSpec
 
   describe "render" do
     it "applies the proper template" do
-      Charlotte.Views.Renderer.render(Charlotte.Views.Test, :view, "cat", :application) |> equals "template view cat"
+      assert Charlotte.Views.Renderer.render(Charlotte.Views.Test, :view, "cat", :application) == "template view cat"
     end
 
     it "renders the specified view" do
-      Charlotte.Views.Renderer.render(Charlotte.Views.Test, :view, "cat", nil) |> "view cat"
+      assert Charlotte.Views.Renderer.render(Charlotte.Views.Test, :view, "cat", nil) == "view cat"
     end
   end
 end

@@ -20,14 +20,28 @@
     </script>
 
     <div id="content">
+      <div class="breadcrumbs">Charlotte v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="Charlotte.html">Charlotte</a> &rarr; <a href="Charlotte.Req.html">Req</a></div>
+
       <h1>
         Charlotte.Req
         
       </h1>
 
+      <ul class="summary_links">
+        
+          <li><a href="#summary">Summary</a></li>
+        
+        
+          <li><a href="#functions_details">Functions</a></li>
+        
+        
+        
+        
+      </ul>
+
       
         <div id="moduledoc" class="docstring">
-          <p>The Charlotte Request Handler contains functions for processing the Cowboy request object.</p>
+          <p>  The Charlotte Request Handler contains functions for processing the Cowboy request object.</p>
 
         </div>
       
@@ -35,35 +49,33 @@
       
 
       
-
-      
-        <h2 id="functions_summary">Functions summary</h2>
+        <h2 id="summary">Summary<div class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></div></h2>
         <table class="summary">
           <tr>
   <td class="summary_signature"><a href="#add_header/2">add_header(conn, header)</a></td>
   
-    <td class="summary_synopsis"><p>Add a new header tuple for the response.  </p>
+    <td class="summary_synopsis"><p>Add a new header tuple for the response</p>
 </td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#build_conn/2">build_conn(req, config)</a></td>
   
-    <td class="summary_synopsis"><p>Parse the cowboy response structure and build a native Conn record.  </p>
+    <td class="summary_synopsis"><p>Parse the cowboy response structure and build a Charlotte.Conn record</p>
 </td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#normalize_to_atoms/1">normalize_to_atoms(params)</a></td>
   
-    <td class="summary_synopsis"><p>Takes a list of tuples and modifies it so that the first value in each tuple is an atom.  </p>
+    <td class="summary_synopsis"><p>Takes a list of tuples and modifies it so that the first value in each tuple is an atom</p>
 </td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#reply/2">reply(status, conn)</a></td>
   
-    <td class="summary_synopsis"><p>Send the reply back to the Client.</p>
+    <td class="summary_synopsis"><p>Send the reply back to the Client</p>
 </td>
   
 </tr>
@@ -74,7 +86,7 @@
 <tr>
   <td class="summary_signature"><a href="#send_file/2">send_file(absolute_path, conn)</a></td>
   
-    <td class="summary_synopsis"><p>Send a file back to the client.  </p>
+    <td class="summary_synopsis"><p>Send a file back to the client</p>
 </td>
   
 </tr>
@@ -85,80 +97,93 @@
       
 
       
-
-      
-
-      
         <div id="functions_details" class="details_list">
           <h2>Functions</h2>
           <div class="detail">
-  <p class="signature" id="add_header/2">
-    <strong>add_header(conn, header)</strong>
-  </p>
+  <div class="detail_header" id="add_header/2">
+    <span class="signature"><strong>add_header(conn, header)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#add_header/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>Add a new header tuple for the response.  </p>
-
-<p>add_header takes two arguments a Charlotte.Req.Conn record and a header tuple.  </p>
+  <div class="docstring"><p>  Add a new header tuple for the response.</p>
+<p>  add_header takes two arguments a Charlotte.Req.Conn record and a header tuple.</p>
 </div>
   
 </div>
 <div class="detail">
-  <p class="signature" id="build_conn/2">
-    <strong>build_conn(req, config)</strong>
-  </p>
+  <div class="detail_header" id="build_conn/2">
+    <span class="signature"><strong>build_conn(req, config)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#build_conn/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>Parse the cowboy response structure and build a native Conn record.  </p>
-
-<p>A Charlotte Conn Record is structured as follows:  </p>
-
-<ul>
-<li>verb: HTTP Verb<br></li>
-<li>params: Query String and all URL Bindings<br></li>
-<li>headers: Request Headers<br></li>
-<li>path: The request path<br></li>
-<li>scheme: :http or :https<br></li>
-</ul>
+  <div class="docstring"><p>  Parse the cowboy response structure and build a Charlotte.Conn record.</p>
 </div>
   
 </div>
 <div class="detail">
-  <p class="signature" id="normalize_to_atoms/1">
-    <strong>normalize_to_atoms(params)</strong>
-  </p>
+  <div class="detail_header" id="normalize_to_atoms/1">
+    <span class="signature"><strong>normalize_to_atoms(params)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#normalize_to_atoms/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>Takes a list of tuples and modifies it so that the first value in each tuple is an atom.  </p>
+  <div class="docstring"><p>  Takes a list of tuples and modifies it so that the first value in each tuple is an atom.</p>
 </div>
   
 </div>
 <div class="detail">
-  <p class="signature" id="reply/2">
-    <strong>reply(status, conn)</strong>
-  </p>
+  <div class="detail_header" id="reply/2">
+    <span class="signature"><strong>reply(status, conn)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#reply/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>Send the reply back to the Client.</p>
-
-<p>reply takes either a status and a conn record or a status, body and conn record.
-  Any specific response headers should be set on the conn record prior to calling 
-  reply.  </p>
+  <div class="docstring"><p>  Send the reply back to the Client.</p>
+<p>  reply takes either a status and a conn record or a status, body and conn record.
+  Any specific response headers should be set on the conn record prior to calling
+  reply.</p>
 </div>
   
 </div>
 <div class="detail">
-  <p class="signature" id="reply/3">
-    <strong>reply(status, body, conn)</strong>
-  </p>
+  <div class="detail_header" id="reply/3">
+    <span class="signature"><strong>reply(status, body, conn)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#reply/3" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
   <div class="docstring"></div>
   
 </div>
 <div class="detail">
-  <p class="signature" id="send_file/2">
-    <strong>send_file(absolute_path, conn)</strong>
-  </p>
+  <div class="detail_header" id="send_file/2">
+    <span class="signature"><strong>send_file(absolute_path, conn)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#send_file/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>Send a file back to the client.  </p>
-
-<p>send_file takes the absolute path to the file and the Charlotte.Req.Conn Record for the current request.</p>
+  <div class="docstring"><p>  Send a file back to the client.</p>
+<p>  send_file takes the absolute path to the file and the Charlotte.Req.Conn Record for the current request.</p>
 </div>
   
 </div>

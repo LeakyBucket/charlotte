@@ -1,5 +1,6 @@
 defmodule CharlotteTest do
-  use Amrita.Sweet
+  use ExUnit.Case
+  use ExSpec
 
   test "the truth" do
     assert(true)

@@ -20,24 +20,38 @@
     </script>
 
     <div id="content">
+      <div class="breadcrumbs">Charlotte v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="Charlotte.html">Charlotte</a> &rarr; <a href="Charlotte.Dispatcher.html">Dispatcher</a></div>
+
       <h1>
         Charlotte.Dispatcher
         
       </h1>
 
+      <ul class="summary_links">
+        
+          <li><a href="#summary">Summary</a></li>
+        
+        
+          <li><a href="#functions_details">Functions</a></li>
+        
+        
+        
+        
+      </ul>
+
       
         <div id="moduledoc" class="docstring">
-          <p>The functions in Charlotte.Dispatcher are intended for building a proper structure for Cowboy&#39;s routing.  </p>
-
-<p>The functions in Charlotte.Dispatcher make a few assumptions about the structure of the underlying application.  </p>
-
+          <p>  The functions in Charlotte.Dispatcher are intended for building a proper structure for Cowboy’s routing.</p>
+<p>  The functions in Charlotte.Dispatcher make a few assumptions about the structure of the underlying application.</p>
 <ul>
-<li>All controllers are assumed to be at the given path.<br></li>
-<li>Each controller module must contain a routes function.<br>
-
+<li>All controllers are assumed to be at the given path.
+</li>
+<li><p>Each controller module must contain a routes function.</p>
 <ul>
-<li>routes must return a list of tuples in the form of {path, action}<br></li>
-</ul></li>
+<li>routes must return a list of tuples in the form of {path, action}
+</li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -46,28 +60,26 @@
       
 
       
-
-      
-        <h2 id="functions_summary">Functions summary</h2>
+        <h2 id="summary">Summary<div class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></div></h2>
         <table class="summary">
           <tr>
   <td class="summary_signature"><a href="#current_routes/0">current_routes()</a></td>
   
-    <td class="summary_synopsis"><p>current_routes builds a list of tuples representing all the paths in the application as well as the module that handles that endpoint.</p>
+    <td class="summary_synopsis"><p>current_routes builds a list of tuples representing all the paths in the application as well as the module that handles that endpoint</p>
 </td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#find_files/0">find_files()</a></td>
   
-    <td class="summary_synopsis"><p>find_files returns a list of all the files found at the given path.</p>
+    <td class="summary_synopsis"><p>find_files returns a list of all the files found at the given path</p>
 </td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#load_controllers/1">load_controllers(files)</a></td>
   
-    <td class="summary_synopsis"><p>load_controllers takes a list of file names (absolute path).  It compiles each file and returns a list of the modules that were generated.</p>
+    <td class="summary_synopsis"><p>load_controllers takes a list of file names (absolute path).  It compiles each file and returns a list of the modules that were generated</p>
 </td>
   
 </tr>
@@ -78,38 +90,48 @@
       
 
       
-
-      
-
-      
         <div id="functions_details" class="details_list">
           <h2>Functions</h2>
           <div class="detail">
-  <p class="signature" id="current_routes/0">
-    <strong>current_routes()</strong>
-  </p>
+  <div class="detail_header" id="current_routes/0">
+    <span class="signature"><strong>current_routes()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#current_routes/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>current_routes builds a list of tuples representing all the paths in the application as well as the module that handles that endpoint.</p>
-
-<p>This function returns a list of tuples.  the tuples consist of the path, the module and an empty list for the initial Cowboy handler state.</p>
+  <div class="docstring"><p>  current_routes builds a list of tuples representing all the paths in the application as well as the module that handles that endpoint.</p>
+<p>  This function returns a list of tuples.  the tuples consist of the path, the module and an empty list for the initial Cowboy handler state.</p>
 </div>
   
 </div>
 <div class="detail">
-  <p class="signature" id="find_files/0">
-    <strong>find_files()</strong>
-  </p>
+  <div class="detail_header" id="find_files/0">
+    <span class="signature"><strong>find_files()</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#find_files/0" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>find_files returns a list of all the files found at the given path.</p>
+  <div class="docstring"><p>  find_files returns a list of all the files found at the given path.</p>
 </div>
   
 </div>
 <div class="detail">
-  <p class="signature" id="load_controllers/1">
-    <strong>load_controllers(files)</strong>
-  </p>
+  <div class="detail_header" id="load_controllers/1">
+    <span class="signature"><strong>load_controllers(files)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#load_controllers/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>load_controllers takes a list of file names (absolute path).  It compiles each file and returns a list of the modules that were generated.</p>
+  <div class="docstring"><p>  load_controllers takes a list of file names (absolute path).  It compiles each file and returns a list of the modules that were generated.</p>
 </div>
   
 </div>

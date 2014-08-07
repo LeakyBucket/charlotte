@@ -20,30 +20,43 @@
     </script>
 
     <div id="content">
+      <div class="breadcrumbs">Charlotte v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="Charlotte.html">Charlotte</a> &rarr; Views &rarr; <a href="Charlotte.Views.Renderer.html">Renderer</a></div>
+
       <h1>
         Charlotte.Views.Renderer
         
       </h1>
 
+      <ul class="summary_links">
+        
+          <li><a href="#summary">Summary</a></li>
+        
+        
+          <li><a href="#functions_details">Functions</a></li>
+        
+        
+        
+        
+      </ul>
+
       
         <div id="moduledoc" class="docstring">
-          <p>The Views Renderer simply encapsulates helper logic for rendering eex templates associated with Controller Actions.  </p>
-
-<p>If a layout is specified then the view content is injected at the @content tag in the layout.</p>
-
-<pre><code>    &lt;html&gt;
-      &lt;head&gt;
-        &lt;title&gt;Test&lt;/title&gt;
-      &lt;/head&gt;
-      &lt;body&gt;
-        &lt;%= @content %&gt;
-      &lt;/body&gt;
-    &lt;/html&gt;
+          <p>  The Views Renderer simply encapsulates helper logic for rendering eex templates associated with Controller Actions.  </p>
+<p>  If a layout is specified then the view content is injected at the @content tag in the layout.</p>
+<p>  ```</p>
+<pre><code>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Test&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;%= @content %&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
 </code></pre>
-
-<p>If no layout is specified (nil) then the view will be rendered as is.  </p>
-
-<p>render/4 should always return content suitable for immediate inclusion in the response body.</p>
+<p>  ```</p>
+<p>  If no layout is specified (nil) then the view will be rendered as is.  </p>
+<p>  render/4 should always return content suitable for immediate inclusion in the response body.</p>
 
         </div>
       
@@ -51,14 +64,12 @@
       
 
       
-
-      
-        <h2 id="functions_summary">Functions summary</h2>
+        <h2 id="summary">Summary<div class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></div></h2>
         <table class="summary">
           <tr>
   <td class="summary_signature"><a href="#render/4">render(controller_mod, view, bindings, template)</a></td>
   
-    <td class="summary_synopsis"><p>Render the specified view.  If a template is specified then the view content is injected into the @content tag in the layout.  Render always returns a binary.</p>
+    <td class="summary_synopsis"><p>Render the specified view.  If a template is specified then the view content is injected into the @content tag in the layout.  Render always returns a binary</p>
 </td>
   
 </tr>
@@ -69,18 +80,19 @@
       
 
       
-
-      
-
-      
         <div id="functions_details" class="details_list">
           <h2>Functions</h2>
           <div class="detail">
-  <p class="signature" id="render/4">
-    <strong>render(controller_mod, view, bindings, template)</strong>
-  </p>
+  <div class="detail_header" id="render/4">
+    <span class="signature"><strong>render(controller_mod, view, bindings, template)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#render/4" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>Render the specified view.  If a template is specified then the view content is injected into the @content tag in the layout.  Render always returns a binary.</p>
+  <div class="docstring"><p>  Render the specified view.  If a template is specified then the view content is injected into the @content tag in the layout.  Render always returns a binary.</p>
 </div>
   
 </div>

@@ -20,46 +20,56 @@
     </script>
 
     <div id="content">
+      <div class="breadcrumbs">Charlotte v0.1.0 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="Charlotte.html">Charlotte</a></div>
+
       <h1>
         Charlotte
         
       </h1>
 
+      <ul class="summary_links">
+        
+          <li><a href="#summary">Summary</a></li>
+        
+        
+          <li><a href="#functions_details">Functions</a></li>
+        
+        
+        
+        
+      </ul>
+
       
         <div id="moduledoc" class="docstring">
-          <p>Charlotte is an Elixir Web Framework.  It is inspired by both Rails and Sinatra.  </p>
+          <p>  Charlotte is an Elixir Web Framework.  It is inspired by both Rails and Sinatra.</p>
+<p>  Charlotte doesn’t come with any particular ORM nor does it expect you to use one.  That doesn’t mean you can’t and it also means you can use whichever you want.</p>
+<p>  Charlotte does expect you to use the Cowboy webserver.  We may branch out to others in the future but the current architecture closely reflects Cowboy’s structure and behaviors.</p>
+<p>  In Charlotte your controllers define both your request handling and your application routing.  Charlote will read the routes defined in each controller and dispatch requests for those routes to the specified action.</p>
+<p>  For example:</p>
+<p>  ```
+  defmodule MyController do</p>
+<pre><code>
+use Charlotte.Handlers.HTTP
 
-<p>Charlotte doesn&#39;t come with any particular ORM nor does it expect you to use one.  That doesn&#39;t mean you can&#39;t and it also means you can use whichever you want.  </p>
+def routes do
+  [
+    {&quot;action1&quot;, :action1},
+    {&quot;action2&quot;, :action2}
+  ]
+end
 
-<p>Charlotte does expect you to use the Cowboy webserver.  We may branch out to others in the future but the current architecture closely reflects Cowboy&#39;s structure and behaviors.   </p>
+def action1(verb, params, conn) do
 
-<p>In Charlotte your controllers define both your request handling and your application routing.  Charlote will read the routes defined in each controller and dispatch requests for those routes to the specified action.  </p>
+end
 
-<p>For example:  </p>
+def action2(verb, params, conn) do
 
-<pre><code>  defmodule MyController do
-    use Charlotte.Handlers.HTTP
-
-    def routes do
-      [
-        {&quot;action1&quot;, :action1},
-        {&quot;action2&quot;, :action2}
-      ]
-    end
-
-    def action1(verb, params, conn) do
-
-    end
-
-    def action2(verb, params, conn) do
-
-    end
-  end
+end
 </code></pre>
-
-<p>Assuming no other controllers Charlotte will handle requests to action1 and action2 and those will be passed to the action1 and action2 functions respectively.</p>
-
-<p>This is different from most other routing configurations out there but we feel it allows for a nice encapsulation of expression.</p>
+<p>  end
+  ```</p>
+<p>  Assuming no other controllers Charlotte will handle requests to action1 and action2 and those will be passed to the action1 and action2 functions respectively.</p>
+<p>  This is different from most other routing configurations out there but we feel it allows for a nice encapsulation of expression.</p>
 
         </div>
       
@@ -67,14 +77,12 @@
       
 
       
-
-      
-        <h2 id="functions_summary">Functions summary</h2>
+        <h2 id="summary">Summary<div class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></div></h2>
         <table class="summary">
           <tr>
-  <td class="summary_signature"><a href="#start/2">start(_type, args)</a></td>
+  <td class="summary_signature"><a href="#start/2">start(type, args)</a></td>
   
-    <td class="summary_synopsis"><p>Callback implementation of <a href="http://www.erlang.org/doc/man/application.html#start-2"><code>:application.start/2</code></a>.</p>
+    <td class="summary_synopsis"><p>Callback implementation of <a href="http://www.erlang.org/doc/man/application.html#start-2"><code class="inline">:application.start/2</code></a></p>
 </td>
   
 </tr>
@@ -85,18 +93,19 @@
       
 
       
-
-      
-
-      
         <div id="functions_details" class="details_list">
           <h2>Functions</h2>
           <div class="detail">
-  <p class="signature" id="start/2">
-    <strong>start(_type, args)</strong>
-  </p>
+  <div class="detail_header" id="start/2">
+    <span class="signature"><strong>start(type, args)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#start/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
   
-  <div class="docstring"><p>Callback implementation of <a href="http://www.erlang.org/doc/man/application.html#start-2"><code>:application.start/2</code></a>.</p>
+  <div class="docstring"><p>Callback implementation of <a href="http://www.erlang.org/doc/man/application.html#start-2"><code class="inline">:application.start/2</code></a>.</p>
 </div>
   
 </div>

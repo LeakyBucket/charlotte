@@ -5,7 +5,7 @@ defmodule Charlotte.Mixfile do
     [ app: :charlotte,
       name: "Charlotte",
       version: "0.1.0",
-      elixir: "~> 0.12.3",
+      elixir: "~> 0.15.0",
       deps: deps(Mix.env) ]
   end
 
@@ -13,15 +13,7 @@ defmodule Charlotte.Mixfile do
   def application do
     [
       mod: { Charlotte, [] },
-      registered: [:charlotte],
-      env: [lager: [
-          handlers: [
-            {:lager_console_backend, :info},
-            {:lager_file_backend, [{:file, "error.log"}, {:level, :error}]},
-            {:lager_file_backend, [{:file, "console.log"}, {:level, :info}]},
-          ]
-        ]
-      ]
+      registered: [:charlotte]
     ]
   end
 
@@ -34,18 +26,17 @@ defmodule Charlotte.Mixfile do
   defp deps(env) when env == :test do
     [
       { :hackney, github: "benoitc/hackney" },
-      { :amrita, github: "josephwilk/amrita" }
+      { :ex_spec, "~> 0.1.0"}
     ] ++ deps(:default)
   end
 
   defp deps(env) when env == :default do
     [
-      {:cowboy, github: "extend/cowboy" },
-      {:exjson, github: "guedes/exjson"},
-      {:plug, github: "elixir-lang/plug"},
-      {:exlager, github: "khia/exlager"},
-      {:ex_doc, github: "elixir-lang/ex_doc"},
-      {:env_conf, github: "LeakyBucket/env_conf"}
+      {:cowboy, "~> 1.0.0" },
+      {:plug, "~> 0.5.2"},
+      {:jazz, "~> 0.2.0"},
+      {:ex_doc, "~> 0.5.1"},
+      {:env_conf, "~> 0.2.0"}
     ]
   end
 end

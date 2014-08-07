@@ -1,5 +1,6 @@
 defmodule Charlotte.Views.CompilerTest do
-  use Amrita.Sweet
+  use ExUnit.Case
+  use ExSpec
 
   # Existing views:  fake_controller/new.eex, test_controller/new.eex, text_controller/create.eex
 
@@ -7,7 +8,7 @@ defmodule Charlotte.Views.CompilerTest do
     it "renders the view" do
       Charlotte.Views.Compiler.compile :production
 
-      Charlotte.Views.FakeController.new([pants: "Wearing them"]) |> equals "Wearing them\n"
+      assert Charlotte.Views.FakeController.new([pants: "Wearing them"]) == "Wearing them\n"
     end
 
     it "doesn't render changes to view after compilation" do
@@ -17,7 +18,7 @@ defmodule Charlotte.Views.CompilerTest do
 
       write_to_file view, (content <> "<%= @lou %>")
 
-      Charlotte.Views.FakeController.new([pants: "Check", lou: "ser"]) |> equals "Check\n"
+      assert Charlotte.Views.FakeController.new([pants: "Check", lou: "ser"]) == "Check\n"
 
       write_to_file view, content
     end
@@ -27,7 +28,7 @@ defmodule Charlotte.Views.CompilerTest do
     it "renders the view" do
       Charlotte.Views.Compiler.compile :development
 
-      Charlotte.Views.FakeController.new([pants: "Ooops!"]) |> equals "Ooops!\n"
+      assert Charlotte.Views.FakeController.new([pants: "Ooops!"]) == "Ooops!\n"
     end
 
     it "renders updates to the view after compilation" do
@@ -38,7 +39,7 @@ defmodule Charlotte.Views.CompilerTest do
 
       write_to_file view, (content <> "<%= @lou %>")
 
-      Charlotte.Views.FakeController.new([pants: "Check", lou: "ser"]) |> equals "Check\nser"
+      assert Charlotte.Views.FakeController.new([pants: "Check", lou: "ser"]) == "Check\nser"
 
       write_to_file view, content
     end
