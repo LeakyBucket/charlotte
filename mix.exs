@@ -4,8 +4,10 @@ defmodule Charlotte.Mixfile do
   def project do
     [ app: :charlotte,
       name: "Charlotte",
-      version: "0.1.0",
+      version: "0.2.0",
       elixir: "~> 0.15.0",
+      description: description,
+      package: package,
       deps: deps(Mix.env) ]
   end
 
@@ -17,11 +19,6 @@ defmodule Charlotte.Mixfile do
     ]
   end
 
-  # Returns the list of dependencies in the format:
-  # { :foobar, git: "https://github.com/elixir-lang/foobar.git", tag: "0.1" }
-  #
-  # To specify particular versions, regardless of the tag, do:
-  # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps(env) when env in [:prod, :dev], do: deps(:default)
   defp deps(env) when env == :test do
     [
@@ -38,5 +35,18 @@ defmodule Charlotte.Mixfile do
       {:ex_doc, "~> 0.5.1"},
       {:env_conf, "~> 0.2.0"}
     ]
+  end
+
+  defp description do
+    """
+      Charlotte is a Web Framework.  It takes a little from Rails and a little from Sinatra and does a few things it's own way.  The goal is to be light weight, fun and get out of your way.
+    """
+  end
+
+  defp package do
+    [files: ["lib", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+     contributors: ["Glen Holcomb"],
+     licenses: ["MIT"],
+     links: %{"GitHub" => "https://github.com/LeakyBucket/charlotte.git"}]
   end
 end
