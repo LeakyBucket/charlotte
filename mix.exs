@@ -8,7 +8,7 @@ defmodule Charlotte.Mixfile do
       elixir: "~> 0.15.0",
       description: description,
       package: package,
-      deps: deps(Mix.env) ]
+      deps: deps ]
   end
 
   # Configuration for the OTP application
@@ -19,22 +19,15 @@ defmodule Charlotte.Mixfile do
     ]
   end
 
-  defp deps(env) when env in [:prod, :dev], do: deps(:default)
-  defp deps(env) when env == :test do
-    [
-      { :hackney, github: "benoitc/hackney" },
-      { :ex_spec, "~> 0.1.0"}
-    ] ++ deps(:default)
-  end
-
-  defp deps(env) when env == :default do
-    [
-      {:cowboy, "~> 1.0.0" },
+  
+  defp deps do
+    [ {:cowboy, "~> 1.0.0"},
       {:plug, "~> 0.5.2"},
       {:jazz, "~> 0.2.0"},
-      {:ex_doc, "~> 0.5.1"},
-      {:env_conf, "~> 0.2.0"}
-    ]
+      {:env_conf, "~> 0.2.0"},
+      {:hackney, github: "benoitc/hackney", only: :test},
+      {:ex_spec, "~> 0.1.0", only: :test},
+      {:ex_doc, "~> 0.5.1", only: :dev} ]
   end
 
   defp description do
