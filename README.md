@@ -15,7 +15,7 @@ That's a good question.  When I first started playing with Elixir there weren't 
 The quickest way to get started is to add Charlotte as a dependency to your project.
 
 ```elixir
-  { :charlotte, github: "LeakyBucket/charlotte" }
+  { :charlotte, "~> 0.2.0" }
 ```
 
 Once you have added and installed the dependency you are good to go.
@@ -23,18 +23,21 @@ Once you have added and installed the dependency you are good to go.
 There are a few different environment variables that Charlotte expects.  These can be set outside the application or defaults can be given to Charlotte.start/2
 
 ```elixir
-  default_config = HashDict.new([
-    {"CHARLOTTE_CONTROLLER_PATH", __DIR__ <> "/support/controllers"},
-    {"CHARLOTTE_VIEW_PATH", __DIR__ <> "/support/views"},
-    {"CHARLOTTE_ASSET_PATH", __DIR__ <> "/support/assets"},
-    {"CHARLOTTE_HOST", "localhost"},
-    {"CHARLOTTE_PROTOCOL", "tcp"},
-    {"CHARLOTTE_ACCEPTORS", "100"},
-    {"CHARLOTTE_COMPRESS", "false"},
-    {"CHARLOTTE_PORT", "8000"}
-  ])
+  default_config = HashDict.new
 
-  Charlotte.start [], [default_config: default_config]
+  Charlotte.start [], [default_config: build_config(default_config)]
+
+  def build_config(default_config) do
+    default_config |>
+      HashDict.put("CHARLOTTE_CONTROLLER_PATH", __DIR__ <> "/support/controllers") |>
+      HashDict.put("CHARLOTTE_VIEW_PATH", __DIR__ <> "/support/views") |>
+      HashDict.put("CHARLOTTE_ASSET_PATH", __DIR__ <> "/support/assets") |>
+      HashDict.put("CHARLOTTE_HOST", "localhost") |>
+      HashDict.put("CHARLOTTE_PROTOCOL", "tcp") |>
+      HashDict.put("CHARLOTTE_ACCEPTORS", "100") |>
+      HashDict.put("CHARLOTTE_COMPRESS", "false") |>
+      HashDict.put("CHARLOTTE_PORT", "8000")
+  end
 ```
 
 #### Note
