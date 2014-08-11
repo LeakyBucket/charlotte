@@ -1,9 +1,10 @@
 defmodule Charlotte.Controllers.NotFoundTest do
-  use Amrita.Sweet
+  use ExUnit.Case
+  use ExSpec
 
   describe "routes" do
     it "defines a catch all route" do
-      Charlotte.Controllers.NotFound.routes |> equals [{"/[...]", :not_found}]
+      Charlotte.Controllers.NotFound.routes == [{"/[...]", :not_found}]
     end
   end
 
