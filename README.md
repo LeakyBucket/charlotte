@@ -15,7 +15,7 @@ That's a good question.  When I first started playing with Elixir there weren't 
 The quickest way to get started is to add Charlotte as a dependency to your project.
 
 ```elixir
-  { :charlotte, "~> 0.2.0" }
+  { :charlotte, "~> 0.3.0" }
 ```
 
 Once you have added and installed the dependency you are good to go.
