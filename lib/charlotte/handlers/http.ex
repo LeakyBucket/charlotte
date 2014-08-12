@@ -31,7 +31,7 @@ defmodule Charlotte.Handlers.HTTP do
 
       def handle(req, state) do
         conn = Charlotte.Req.build_conn req, state
-        action = find_action(conn.path)
+        action = find_action(routes, conn.path)
 
         # Invoke the proper action for the path
         Kernel.apply(__MODULE__, action, [conn.verb, conn.params, conn])
@@ -43,12 +43,17 @@ defmodule Charlotte.Handlers.HTTP do
         :ok
       end
 
-      defp find_action(path) do
-        routes[path]
+      defp find_action([route | rest], path) do
+        case route do
+          {^path, action} ->
+            action
+          _ ->
+            find_action(rest, path)
+        end
       end
 
       defp render(status \\ 200, bindings, conn) do
-        body = Charlotte.Views.Renderer.render(__MODULE__, find_action(conn.path), bindings, @layout)
+        body = Charlotte.Views.Renderer.render(__MODULE__, find_action(routes, conn.path), bindings, @layout)
         conn = conn |> Charlotte.Req.add_header {"content-type", "text/html"}
 
         Charlotte.Req.reply(status, body, conn)
