@@ -40,10 +40,6 @@ There are a few different environment variables that Charlotte expects.  These c
   end
 ```
 
-#### Note
-
-There are currently issues when using Chrome.  Any request appears to generate a 400 response.  I'm not sure why yet.  Any insight would be appreciated.  Firefox appears to work fine.
-
 ## Long How
 
 ### Routes  
@@ -199,18 +195,21 @@ Charlotte uses [EnvConf](https://github.com/LeakyBucket/env_conf) to manage conf
 It is possible to send defaults when starting Charlotte from your application module:  
 
 ```elixir
-  default_config = HashDict.new([
-    {"CHARLOTTE_CONTROLLER_PATH", __DIR__ <> "/support/controllers"},
-    {"CHARLOTTE_VIEW_PATH", __DIR__ <> "/support/views"},
-    {"CHARLOTTE_ASSET_PATH", __DIR__ <> "/support/assets"},
-    {"CHARLOTTE_HOST", "localhost"},
-    {"CHARLOTTE_PROTOCOL", "tcp"},
-    {"CHARLOTTE_ACCEPTORS", "100"},
-    {"CHARLOTTE_COMPRESS", "false"},
-    {"CHARLOTTE_PORT", "8000"}
-  ])
+  default_config = HashDict.new
 
-  Charlotte.start([], [default_config: default_config])
+  Charlotte.start [], [default_config: build_config(default_config)]
+
+  def build_config(default_config) do
+    default_config |>
+      HashDict.put("CHARLOTTE_CONTROLLER_PATH", __DIR__ <> "/support/controllers") |>
+      HashDict.put("CHARLOTTE_VIEW_PATH", __DIR__ <> "/support/views") |>
+      HashDict.put("CHARLOTTE_ASSET_PATH", __DIR__ <> "/support/assets") |>
+      HashDict.put("CHARLOTTE_HOST", "localhost") |>
+      HashDict.put("CHARLOTTE_PROTOCOL", "tcp") |>
+      HashDict.put("CHARLOTTE_ACCEPTORS", "100") |>
+      HashDict.put("CHARLOTTE_COMPRESS", "false") |>
+      HashDict.put("CHARLOTTE_PORT", "8000")
+  end
 ```  
 
 You can store/build these defaults however you wish.  All Charlotte cares about is that they are given as a HashDict.
