@@ -4,7 +4,7 @@ defmodule Charlotte.Mixfile do
   def project do
     [ app: :charlotte,
       name: "Charlotte",
-      version: "0.2.1",
+      version: "0.3.0",
       elixir: "~> 0.15.0",
       description: description,
       package: package,
@@ -19,7 +19,7 @@ defmodule Charlotte.Mixfile do
     ]
   end
 
-  
+
   defp deps do
     [ {:cowboy, "~> 1.0.0"},
       {:plug, "~> 0.5.2"},
