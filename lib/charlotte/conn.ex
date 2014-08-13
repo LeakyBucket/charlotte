@@ -10,7 +10,8 @@ defmodule Charlotte.Conn do
     * params: Query String and all URL Bindings
     * headers: Request Headers
     * path: The request path
+    * route: The route for the request
     * scheme: :http or :https
   """
-  defstruct req: nil, verb: "", params: [], req_headers: "", headers: [], path: "", scheme: ""
+  defstruct req: nil, verb: "", params: [], req_headers: "", headers: [], path: "", route: "", scheme: ""
 end

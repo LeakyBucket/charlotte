@@ -17,6 +17,7 @@ defmodule Charlotte.Req do
     {:ok, body_qs, req} = Request.body_qs req
 
     params = bindings ++ body_qs ++ params
+    route = path_with_bindings(path, bindings) |> String.rstrip ?/
 
     %Charlotte.Conn{
       req: req,
@@ -25,6 +26,7 @@ defmodule Charlotte.Req do
       req_headers: headers,
       headers: [],
       path: path,
+      route: route,
       scheme: scheme(config[:protocol])
     }
   end
@@ -71,6 +73,21 @@ defmodule Charlotte.Req do
                end
 
     Request.set_resp_body_fun(file_size(absolute_path), file_fun, conn.req)
+  end
+
+  defp path_with_bindings(path, bindings) do
+    restore_bindings(bindings, String.split(path, "/")) |> List.foldr "", &("#{&1}/#{&2}")
+  end
+
+  defp restore_bindings(bindings, path_parts) do
+    Enum.map path_parts, fn(part) ->
+      case List.keyfind(bindings, part, 1) do
+        {binding, _} ->
+          ":#{binding}"
+        _ ->
+          part
+      end
+    end
   end
 
   # Get the file size for Cowboy
