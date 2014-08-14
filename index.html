@@ -31,37 +31,308 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h2>
+<a name="what" class="anchor" href="#what"><span class="octicon octicon-link"></span></a>What?</h2>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>Charlotte is a Web Framework written in Elixir.  It takes after
+both Rails and Sinatra in some ways.  In other ways Charlotte is
+a different animal entirely.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<h2>
+<a name="why" class="anchor" href="#why"><span class="octicon octicon-link"></span></a>Why?</h2>
+
+<p>That's a good question.  When I first started playing with Elixir
+there weren't a ton of frameworks out there.  I decided that as
+part of learning the language I'd build one.</p>
+
+<h2>
+<a name="short-how" class="anchor" href="#short-how"><span class="octicon octicon-link"></span></a>Short How</h2>
+
+<p>The quickest way to get started is to add Charlotte as a dependency
+to your project.</p>
+
+<div class="highlight highlight-elixir"><pre>  <span class="p">{</span> <span class="ss">:charlotte</span><span class="p">,</span> <span class="s2">"~&gt; 0.3.0"</span> <span class="p">}</span>
+</pre></div>
+
+<p>Once you have added and installed the dependency you are good to go.</p>
+
+<p>There are a few different environment variables that Charlotte
+expects.  These can be set outside the application or defaults
+can be given to Charlotte.start/2</p>
+
+<div class="highlight highlight-elixir"><pre>  <span class="n">default_config</span> <span class="p">=</span> <span class="nc">HashDict</span><span class="p">.</span><span class="n">new</span>
+
+  <span class="nc">Charlotte</span><span class="p">.</span><span class="n">start</span> <span class="p">[],</span> <span class="p">[</span><span class="ss">default_config</span><span class="p">:</span> <span class="n">build_config</span><span class="p">(</span><span class="n">default_config</span><span class="p">)]</span>
+
+  <span class="kd">def</span> <span class="n">build_config</span><span class="p">(</span><span class="n">default_config</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">default_config</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_CONTROLLER_PATH"</span><span class="p">,</span> <span class="bp">__DIR__</span> <span class="o">&lt;&gt;</span> <span class="s2">"/support/controllers"</span><span class="p">)</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_VIEW_PATH"</span><span class="p">,</span> <span class="bp">__DIR__</span> <span class="o">&lt;&gt;</span> <span class="s2">"/support/views"</span><span class="p">)</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_ASSET_PATH"</span><span class="p">,</span> <span class="bp">__DIR__</span> <span class="o">&lt;&gt;</span> <span class="s2">"/support/assets"</span><span class="p">)</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_HOST"</span><span class="p">,</span> <span class="s2">"localhost"</span><span class="p">)</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_PROTOCOL"</span><span class="p">,</span> <span class="s2">"tcp"</span><span class="p">)</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_ACCEPTORS"</span><span class="p">,</span> <span class="s2">"100"</span><span class="p">)</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_COMPRESS"</span><span class="p">,</span> <span class="s2">"false"</span><span class="p">)</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_PORT"</span><span class="p">,</span> <span class="s2">"8000"</span><span class="p">)</span>
+  <span class="k">end</span>
+</pre></div>
+
+<h2>
+<a name="long-how" class="anchor" href="#long-how"><span class="octicon octicon-link"></span></a>Long How</h2>
+
+<h3>
+<a name="routes" class="anchor" href="#routes"><span class="octicon octicon-link"></span></a>Routes</h3>
+
+<p>Routing in Charlotte is a bit different than most other frameworks.
+Routes are actually a concern of the controller.  </p>
+
+<div class="highlight highlight-elixir"><pre>  <span class="kd">defmodule</span> <span class="nc">MyController</span> <span class="k">do</span>
+    <span class="kn">use</span> <span class="nc">Charlotte.Handlers.HTTP</span>
+
+    <span class="kd">def</span> <span class="n">routes</span> <span class="k">do</span>
+      <span class="p">[</span>
+        <span class="p">{</span><span class="s2">"/"</span><span class="p">,</span> <span class="ss">:root</span><span class="p">}</span>
+      <span class="p">]</span>
+    <span class="k">end</span>
+
+    <span class="kd">def</span> <span class="n">root</span><span class="p">(</span><span class="n">verb</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span> <span class="k">do</span>
+      <span class="p">...</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</pre></div>
+
+<p>Each controller defines the routes that it is responsible for.
+Charlotte expects this to be in the form of a list of <code>{path, action}</code>
+tuples.  The path should be a binary/string with the actual path
+that should be matched.  </p>
+
+<p>You can provide <a href="http://ninenines.eu/docs/en/cowboy/HEAD/guide/routing/">Cowboy-style bindings</a>
+in this path declaration.  </p>
+
+<div class="highlight highlight-elixir"><pre>  <span class="kd">def</span> <span class="n">routes</span> <span class="k">do</span>
+    <span class="p">[</span>
+      <span class="p">{</span><span class="s2">"/"</span><span class="p">,</span> <span class="ss">:root</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">"/path/with/:variable"</span><span class="p">,</span> <span class="ss">:variable_path</span><span class="p">}</span>
+    <span class="p">]</span>
+  <span class="k">end</span>
+</pre></div>
+
+<p>These bindings will be present in the parameters passed to the
+action. In the example above a request to <code>/path/with/value</code>
+would be handled by the <code>variable_path</code> action and in that
+action <code>params[:variable]</code> would return <code>"value"</code>.</p>
+
+<p>The action should always be an atom
+with the same name as the function to be called when that path is
+requested.  That function is assumed to exist in the module that
+defines the route.  </p>
+
+<h3>
+<a name="controllers" class="anchor" href="#controllers"><span class="octicon octicon-link"></span></a>Controllers</h3>
+
+<h4>
+<a name="organization" class="anchor" href="#organization"><span class="octicon octicon-link"></span></a>Organization</h4>
+
+<p>A Charlotte controller is simply a module that exists in the
+CHARLOTTE_CONTROLLER_PATH directory.  </p>
+
+<pre><code>  # Assuming CHARLOTTE_CONTROLLER_PATH environment var is set to "/var/www/app/controllers"
+
+  $ ls /var/www/app/controllers
+    users.ex
+    fees.ex
+    locations.ex
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>In the above example Charlotte would assume users.ex, fees.ex and
+locations.ex define controller modules.  </p>
+
+<h4>
+<a name="content" class="anchor" href="#content"><span class="octicon octicon-link"></span></a>Content</h4>
+
+<p>In order for a controller module to be useful for Charlotte it
+needs to do the following:  </p>
+
+<ul>
+<li>Implement a routes function as described above</li>
+<li>Implement the appropriate Cowboy callbacks for the protocol it supports</li>
+<li>Handle view rendering and formatting and sending the response to the client<br>
+</li>
+</ul><p>It is possible to implement the last two requirements yourself or
+you can simply use the appropriate Charlotte Handler.  </p>
+
+<div class="highlight highlight-elixir"><pre>  <span class="kd">defmodule</span> <span class="nc">MyController</span> <span class="k">do</span>
+    <span class="kn">use</span> <span class="nc">Charlotte.Handlers.HTTP</span>
+
+    <span class="p">...</span>
+  <span class="k">end</span>
+</pre></div>
+
+<p>The HTTP Handler will define the required callbacks for HTTP 1.1
+in Cowboy as well as a few helpers for generating a response:
+render/3 redirect/2 forbidden/1  </p>
+
+<h4>
+<a name="responding" class="anchor" href="#responding"><span class="octicon octicon-link"></span></a>Responding</h4>
+
+<p>The render function takes 3 arguments:  </p>
+
+<ul>
+<li>status</li>
+<li>bindings</li>
+<li>conn</li>
+</ul><p>The status is the integer status code that should accompany the
+response.  The default value is 200.  </p>
+
+<p>The bindings should be a key: value list for the view.  The keys
+should map to variable names in your view.  </p>
+
+<p>The conn is the conn record that was passed to your Controller
+action.  This is used in building and sending the response.  </p>
+
+<p>The redirect function takes 2 arguments:  </p>
+
+<ul>
+<li>status</li>
+<li>conn</li>
+</ul><p>The status is the integer status code that should accompany the
+response.  The default is 302.  </p>
+
+<p>The conn is the conn record that was passed to your Controller
+action.  This is used in building and sending the response.  </p>
+
+<p>The forbidden function takes one argument:  </p>
+
+<ul>
+<li>conn</li>
+</ul><p>The conn is the conn record that was passed to your Controller
+action.  This is used in building and sending the response.  </p>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="views" class="anchor" href="#views"><span class="octicon octicon-link"></span></a>Views</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<h4>
+<a name="organization-1" class="anchor" href="#organization-1"><span class="octicon octicon-link"></span></a>Organization</h4>
+
+<p>Views in Charlotte are organized similarly to Views in Rails.
+The view files for a controller are expected to be in a
+subdirectory of the CHARLOTTE_VIEW_PATH with the same name as
+the controller module that uses the view.  The actual view file
+is expected to have the same name as the controller action that
+renders it.  </p>
+
+<div class="highlight highlight-elixir"><pre>  <span class="c1"># Assuming a CHARLOTTE_VIEW_PATH of "/var/www/app/views"</span>
+
+  <span class="err">$</span> <span class="n">ls</span> <span class="o">-</span><span class="nc">R</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">views</span>
+    <span class="p">.</span><span class="o">/</span><span class="ss">users</span><span class="p">:</span>
+      <span class="n">show</span><span class="p">.</span><span class="n">ex</span>
+      <span class="n">new</span><span class="p">.</span><span class="n">ex</span>
+    <span class="p">.</span><span class="o">/</span><span class="ss">fees</span><span class="p">:</span>
+      <span class="n">list</span><span class="p">.</span><span class="n">ex</span>
+    <span class="p">.</span><span class="o">/</span><span class="ss">locations</span><span class="p">:</span>
+      <span class="n">new</span><span class="p">.</span><span class="n">ex</span>
+</pre></div>
+
+<p>The above structure would result in the following code being
+generated:  </p>
+
+<ul>
+<li>Charlotte.Views.Users
+
+<ul>
+<li>show/1</li>
+<li>new/1</li>
+</ul>
+</li>
+<li>Charlotte.Views.Fees
+
+<ul>
+<li>list/1</li>
+</ul>
+</li>
+<li>Charlotte.Views.Locations
+
+<ul>
+<li>new/1<br>
+</li>
+</ul>
+</li>
+</ul><p>These are public functions and can be called from any where at
+any time.  However the render function which is injected by the
+HTTP Handler will look them up and call the appropriate function.</p>
+
+<h4>
+<a name="content-1" class="anchor" href="#content-1"><span class="octicon octicon-link"></span></a>Content</h4>
+
+<p>Views are rendered by EEx.  Any assigned variables should be
+preceeded by an @  </p>
+
+<div class="highlight highlight-erb"><pre><span class="x">  Your name is </span><span class="cp">&lt;%=</span> <span class="vi">@name</span> <span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>
+
+<p>When you are running your application in development views
+will be read from the file each time they are called.  This
+means you don't need to restart the application to get
+changes to existing views.  However Charlotte doesn't pick
+up new view files unless it is restarted.  This is due to the
+way the views are structured when compiled.  </p>
+
+<p>There are plans to build a default URL that when requested will
+cause a recompile of all Views.  </p>
+
+<p>Charlotte currently doesn't have any helpers for link generation.
+This is planned for the future.  </p>
 
 <h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>A brief word on configuration.  Charlotte is built to use a
+<a href="http://12factor.net/config">12 Factor</a> approach to configuration.  </p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<p>With this in mind the framework it's self expects a few
+configuration variables to be present:  </p>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<ul>
+<li>CHARLOTTE_CONTROLLER_PATH</li>
+<li>CHARLOTTE_VIEW_PATH</li>
+<li>CHARLOTTE_ASSET_PATH</li>
+<li>CHARLOTTE_HOST</li>
+<li>CHARLOTTE_PROTOCOL</li>
+<li>CHARLOTTE_ACCEPTORS</li>
+<li>CHARLOTTE_COMPRESS</li>
+<li>CHARLOTTE_PORT<br>
+</li>
+</ul><p>Charlotte uses <a href="https://github.com/LeakyBucket/env_conf">EnvConf</a>
+to manage configuration settings, this also allows you to use the
+same in your application without any additional setup.  </p>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<p>It is possible to send defaults when starting Charlotte from
+your application module:  </p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<div class="highlight highlight-elixir"><pre>  <span class="n">default_config</span> <span class="p">=</span> <span class="nc">HashDict</span><span class="p">.</span><span class="n">new</span>
+
+  <span class="nc">Charlotte</span><span class="p">.</span><span class="n">start</span> <span class="p">[],</span> <span class="p">[</span><span class="ss">default_config</span><span class="p">:</span> <span class="n">build_config</span><span class="p">(</span><span class="n">default_config</span><span class="p">)]</span>
+
+  <span class="kd">def</span> <span class="n">build_config</span><span class="p">(</span><span class="n">default_config</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">default_config</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_CONTROLLER_PATH"</span><span class="p">,</span> <span class="bp">__DIR__</span> <span class="o">&lt;&gt;</span> <span class="s2">"/support/controllers"</span><span class="p">)</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_VIEW_PATH"</span><span class="p">,</span> <span class="bp">__DIR__</span> <span class="o">&lt;&gt;</span> <span class="s2">"/support/views"</span><span class="p">)</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_ASSET_PATH"</span><span class="p">,</span> <span class="bp">__DIR__</span> <span class="o">&lt;&gt;</span> <span class="s2">"/support/assets"</span><span class="p">)</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_HOST"</span><span class="p">,</span> <span class="s2">"localhost"</span><span class="p">)</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_PROTOCOL"</span><span class="p">,</span> <span class="s2">"tcp"</span><span class="p">)</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_ACCEPTORS"</span><span class="p">,</span> <span class="s2">"100"</span><span class="p">)</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_COMPRESS"</span><span class="p">,</span> <span class="s2">"false"</span><span class="p">)</span> <span class="o">|&gt;</span>
+      <span class="nc">HashDict</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s2">"CHARLOTTE_PORT"</span><span class="p">,</span> <span class="s2">"8000"</span><span class="p">)</span>
+  <span class="k">end</span>
+</pre></div>
+
+<p>You can store/build these defaults however you wish.  All Charlotte
+cares about is that they are given as a HashDict.</p>
+
+<p>EnvConf will not overwrite any values that are already present in
+the environment so it is safe to leave dev defaults in your code.
+They won't overwrite configuration set in the environment directly
+on a production system.</p>
       </section>
     </div>
 
