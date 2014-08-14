@@ -1,0 +1,7 @@
+source: .
+destination: ./_site
+markdown: redcarpet
+name: Charlotte
+description: a small modular Elixir web-framework
+highlighter: pygments
+github: [Repository metadata]

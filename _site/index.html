@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Charlotte : Elixir Web Framework">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title></title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/LeakyBucket/charlotte">View on GitHub</a>
+
+          <h1 id="project_title"></h1>
+          <h2 id="project_tagline"></h2>
+        </header>
+    </div>
+
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <div class="highlight"><pre><code class="language-elixir" data-lang="elixir">  <span class="kd">defmodule</span> <span class="nc">Users</span> <span class="k">do</span>  
+    <span class="kn">use</span> <span class="nc">Charlotte.Handlers.HTTP</span>  
+
+    <span class="kd">def</span> <span class="n">routes</span> <span class="k">do</span>
+      <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;/users&quot;</span><span class="p">,</span> <span class="ss">:index</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;/user/:id&quot;</span><span class="p">,</span> <span class="ss">:show</span><span class="p">}</span>
+      <span class="p">]</span>
+    <span class="k">end</span>
+
+    <span class="kd">def</span> <span class="n">users</span><span class="p">(</span><span class="n">verb</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span> <span class="k">do</span>
+      <span class="n">users</span> <span class="p">=</span> <span class="nc">UserFinder</span><span class="p">.</span><span class="n">all</span>
+
+      <span class="n">render</span> <span class="p">[</span><span class="ss">users</span><span class="p">:</span> <span class="n">users</span><span class="p">],</span> <span class="n">conn</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+</code></pre></div>
+<p><br /></p>
+
+<h2>Charlotte is</h2>
+
+<p>A web-framework written entirely in Elixir.  </p>
+
+<p>Charlotte is similar to <a href="http://www.sinatrarb.com/">Sinatra</a> in
+that it aims to be small and stay out of your way.  </p>
+
+<p>Charlotte is similar to <a href="http://rubyonrails.org/">Rails</a> in that
+it tries to take care of tedium for you.  </p>
+
+<p>Charlotte is different in that it</p>
+
+<h2>Charlotte is not</h2>
+
+<p>Charlotte is not like a majority of other frameworks. It aims
+to be as modular as possible.  In the future this will include
+handling multiple protocols in the same application, everything
+from Websocket and SPDY to HTTP 2.0.</p>
+
+<p>Charlotte is not yet mature enough for production.  It is a
+definite work in progress.  </p>
+
+      </section>
+    </div>
+
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Charlotte maintained by <a href="https://github.com/LeakyBucket">LeakyBucket</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+  </body>
+</html>
