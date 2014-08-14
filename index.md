@@ -33,8 +33,6 @@ that it aims to be small and stay out of your way.
 Charlotte is similar to [Rails](http://rubyonrails.org/) in that
 it tries to take care of tedium for you.  
 
-Charlotte is different in that it
-
 ## Charlotte is not
 
 Charlotte is not like a majority of other frameworks. It aims
