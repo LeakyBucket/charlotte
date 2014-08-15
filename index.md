@@ -13,7 +13,7 @@ layout: default
       ]
     end
 
-    def users(_verb, params, conn) do
+    def users(_verb, _params, conn) do
       users = UserFinder.all
 
       render [users: users], conn

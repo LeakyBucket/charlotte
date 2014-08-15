@@ -35,7 +35,7 @@
       <span class="p">]</span>
     <span class="k">end</span>
 
-    <span class="kd">def</span> <span class="n">users</span><span class="p">(</span><span class="n">_verb</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span> <span class="k">do</span>
+    <span class="kd">def</span> <span class="n">users</span><span class="p">(</span><span class="n">_verb</span><span class="p">,</span> <span class="n">_params</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span> <span class="k">do</span>
       <span class="n">users</span> <span class="p">=</span> <span class="nc">UserFinder</span><span class="p">.</span><span class="n">all</span>
 
       <span class="n">render</span> <span class="p">[</span><span class="ss">users</span><span class="p">:</span> <span class="n">users</span><span class="p">],</span> <span class="n">conn</span>
