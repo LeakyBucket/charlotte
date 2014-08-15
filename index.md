@@ -45,3 +45,35 @@ it does not come with a persistence library.
 
 Charlotte is not yet mature enough for production.  It is a
 definite work in progress.  
+
+## Quick and Dirty
+
+In order to get started with Charlotte you need to add it as a
+dependency.
+
+```elixir
+  {:charlotte, '~> 0.3.0'}
+```
+
+After installing Charlotte you can start using it in your
+application.  
+
+In order for Charlotte to listen and handle requests it needs
+to be started. This would usually be done in the `start` function
+for your application. Charlotte doesn't require any special
+arguments to start however it does expect a bit of [configuration](https://github.com/LeakyBucket/charlotte#configuration).
+This can either be set in the environment or it can be passed to
+`Charlotte.start/2`.  
+
+The following values need to be set before starting Charlotte or
+given as an argument to `Charlotte.start/2`.  
+
+* CHARLOTTE\_CONTROLLER\_PATH
+* CHARLOTTE\_VIEW\_PATH
+* CHARLOTTE\_ASSET\_PATH
+* CHARLOTTE\_HOST
+* CHARLOTTE\_PROTOCOL
+* CHARLOTTE\_ACCEPTORS
+* CHARLOTTE\_COMPRESS
+* CHARLOTTE\_PORT
+
