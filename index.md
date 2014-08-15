@@ -122,3 +122,19 @@ In the above example the render function causes Charlotte to
 render the `level_one.eex` file located in the `CHARLOTTE_VIEW_PATH`
 for the controller module (`$CHARLOTTE_VIEW_PATH/<CONTROLLER_NAME>/level_one.eex`).  
 
+## Views
+
+Currently Charlotte only supports `EEx` for it's templating,
+however there are plans to add `Haml` in the near future.  
+
+All views live in the directories in the `CHARLOTTE_VIEW_PATH`
+location.  Views are expected to be [EEx](http://elixir-lang.org/docs/stable/eex/)
+templates and should be named the same as the controller action
+that renders them.
+
+```erb
+  <p>This is the level_one view</p>
+
+  <p>The level is <%= @level %></p>
+```
+
