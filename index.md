@@ -38,7 +38,10 @@ it tries to take care of tedium for you.
 Charlotte is not like a majority of other frameworks. It aims
 to be as modular as possible.  In the future this will include
 handling multiple protocols in the same application, everything
-from Websocket and SPDY to HTTP 2.0.
+from Websocket and SPDY to HTTP 2.0.  
+
+Charlotte is not like [Rails](http://rubyonrails.org/) in that
+it does not come with a persistence library.  
 
 Charlotte is not yet mature enough for production.  It is a
 definite work in progress.  
