@@ -138,3 +138,10 @@ that renders them.
   <p>The level is <%= @level %></p>
 ```
 
+## Assets
+
+Last but not least, assets. Assets can be served by Charlotte
+just like anything else. Assets are mapped to `/assets/[...]`,
+that is a catch-all route that will match any path starting
+with `/assets/`.  Cowboy should be smart enough to determine
+the file type and respond appropriately.
