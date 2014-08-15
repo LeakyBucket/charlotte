@@ -77,3 +77,48 @@ given as an argument to `Charlotte.start/2`.
 * CHARLOTTE\_COMPRESS
 * CHARLOTTE\_PORT
 
+## Controllers
+
+Each controller in Charlotte is a single Elixir module. The
+controller consists of a `Charlotte.Handler`, route definitions
+and functions representing actions.  
+
+The handler defines the callbacks necessary for Cowboy to use
+your module as a protocol handler.  Cowboy supports several
+protocols and eventually Charlotte will too but for now we only
+support `HTTP 1.1`.  
+
+```elixir
+  use Charlotte.Handlers.HTTP
+```
+
+Each controller defines the routes it is responsible for directly
+in the controller module. Routes are defined in the form of a
+list of `{path, action}` tuples where the `path` is given as a
+string and the `action` is an atom.
+
+```elixir
+  def routes do
+    [
+      {"/", :root},
+      {"/one", :level_one}
+    ]
+  end
+```
+
+The handler will handle looking up the action based on the path
+and calling the proper function in your controller module.  
+
+Every action accepts three arguments: the HTTP verb, request
+parameters and a connection record.
+
+```elixir
+  def level_one(_verb, _params, conn) do
+    render [level: "one"], conn
+  end
+```
+
+In the above example the render function causes Charlotte to
+render the `level_one.eex` file located in the `CHARLOTTE_VIEW_PATH`
+for the controller module (`$CHARLOTTE_VIEW_PATH/<CONTROLLER_NAME>/level_one.eex`).  
+
