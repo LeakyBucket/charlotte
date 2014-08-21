@@ -60,6 +60,7 @@ defmodule Charlotte.Handlers.HTTP do
       end
 
       defp redirect(status \\ 302, conn), do: Charlotte.Req.reply(status, conn)
+      defp respond(status, body, conn), do: Charlotte.Req.reply(status, body, conn)
       defp forbidden(conn), do: Charlotte.Req.reply(403, conn)
 
       defoverridable Module.definitions_in(__MODULE__)
