@@ -4,7 +4,7 @@ defmodule Charlotte.Mixfile do
   def project do
     [ app: :charlotte,
       name: "Charlotte",
-      version: "0.3.1",
+      version: "0.3.2",
       elixir: "~> 0.15.0",
       description: description,
       package: package,
