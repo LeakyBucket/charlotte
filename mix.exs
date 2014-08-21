@@ -40,6 +40,7 @@ defmodule Charlotte.Mixfile do
     [files: ["lib", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
      contributors: ["Glen Holcomb"],
      licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/LeakyBucket/charlotte.git"}]
+     links: %{"GitHub" => "https://github.com/LeakyBucket/charlotte.git",
+              "Home Page" => "http://leakybucket.github.io/charlotte"}]
   end
 end
