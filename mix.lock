@@ -8,4 +8,5 @@
   "idna": {:git, "git://github.com/benoitc/erlang-idna.git", "21aa158b7f36bf2a000f12fe40d7f21eece9cf65", [tag: "hackney-0.11.2"]},
   "jazz": {:package, "0.2.0"},
   "plug": {:package, "0.5.3"},
-  "ranch": {:package, "1.0.0"}}
+  "ranch": {:package, "1.0.0"},
+  "uuid": {:package, "0.1.5"}}

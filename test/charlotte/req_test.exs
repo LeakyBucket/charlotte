@@ -21,7 +21,8 @@ defmodule Charlotte.ReqTest do
 
   describe "build_conn" do
     it "returns a conn record with the data from the request" do
-      assert Charlotte.Req.build_conn([], [{:protocol, :tcp}]) == %Charlotte.Conn{req: [], verb: "GET", params: [cat: "meow", fish: "glug", dog: "woof"], req_headers: "", headers: [], path: "/bob", route: "/bob", scheme: :http}
+      conn = Charlotte.Req.build_conn([], [{:protocol, :tcp}])
+      assert conn == %Charlotte.Conn{req: [], request_id: conn.request_id, verb: "GET", params: [cat: "meow", fish: "glug", dog: "woof"], req_headers: "", headers: [], path: "/bob", route: "/bob", scheme: :http}
     end
   end
 
