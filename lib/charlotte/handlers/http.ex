@@ -18,12 +18,16 @@ defmodule Charlotte.Handlers.HTTP do
     setup also adds three convenience functions for crafting responses for the client:
 
     * render(status \\ 200, bindings, conn)
+    * respond(status, body, conn)
+    * respond(status, headers, body, conn)
     * redirect(status \\ 302, conn)
     * forbidden(conn)
   """
   defmacro __using__(_args) do
     quote do
       @layout nil
+
+      require Logger
 
       def init({:tcp, :http}, req, config) do
         {:ok, req, config}
@@ -33,8 +37,11 @@ defmodule Charlotte.Handlers.HTTP do
         conn = Charlotte.Req.build_conn req, state
         action = find_action(routes, conn.route)
 
-        # Invoke the proper action for the path
+        lifecycle :start, conn
+
         Kernel.apply(__MODULE__, action, [conn.verb, conn.params, conn])
+
+        lifecycle :finish, conn
 
         {:ok, req, state}
       end
@@ -66,6 +73,9 @@ defmodule Charlotte.Handlers.HTTP do
       defp respond(status, headers, body, conn) do
         Charlotte.Req.reply(status, body, Charlotte.Req.add_header(conn, headers))
       end
+
+      defp lifecycle(:start, conn), do: Charlotte.Logger.begin(conn)
+      defp lifecycle(:finish, conn), do: Charlotte.Logger.finish(conn)
 
       defoverridable Module.definitions_in(__MODULE__)
     end

@@ -6,6 +6,7 @@ defmodule Charlotte.Conn do
   @doc """
     A Charlotte Conn Struct contains the following data:
 
+    * request_id: Randomly generated ID for the request
     * verb: HTTP Verb
     * params: Query String and all URL Bindings
     * headers: Request Headers
@@ -13,5 +14,5 @@ defmodule Charlotte.Conn do
     * route: The route for the request
     * scheme: :http or :https
   """
-  defstruct req: nil, verb: "", params: [], req_headers: "", headers: [], path: "", route: "", scheme: ""
+  defstruct req: nil, request_id: nil, verb: "", params: [], req_headers: "", headers: [], path: "", route: "", scheme: ""
 end

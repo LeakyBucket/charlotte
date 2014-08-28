@@ -1,5 +1,3 @@
-ExUnit.start
-
 default_config = HashDict.new() |>
   HashDict.put("CHARLOTTE_CONTROLLER_PATH", __DIR__ <> "/support/controllers") |>
   HashDict.put("CHARLOTTE_VIEW_PATH", __DIR__ <> "/support/views") |>
@@ -12,3 +10,5 @@ default_config = HashDict.new() |>
 
 
 Charlotte.start([], [default_config: default_config])
+
+ExUnit.start

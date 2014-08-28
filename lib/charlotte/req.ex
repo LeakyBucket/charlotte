@@ -21,6 +21,7 @@ defmodule Charlotte.Req do
 
     %Charlotte.Conn{
       req: req,
+      request_id: UUID.uuid4,
       verb: verb,
       params: normalize_to_atoms(params),
       req_headers: headers,
