@@ -4,8 +4,8 @@ defmodule Charlotte.Mixfile do
   def project do
     [ app: :charlotte,
       name: "Charlotte",
-      version: "0.3.4",
-      elixir: "~> 0.15.0",
+      version: "0.4.0",
+      elixir: "~> 1.0.0",
       description: description,
       package: package,
       deps: deps ]
@@ -23,13 +23,12 @@ defmodule Charlotte.Mixfile do
 
   defp deps do
     [ {:cowboy, "~> 1.0.0"},
-      {:plug, "~> 0.5.2"},
       {:jazz, "~> 0.2.0"},
-      {:env_conf, "~> 0.2.0"},
+      {:env_conf, "~> 0.3.0"},
       {:uuid, "~> 0.1.5"},
       {:hackney, github: "benoitc/hackney", only: :test},
       {:ex_spec, "~> 0.1.0", only: :test},
-      {:ex_doc, "~> 0.5.1", only: :dev} ]
+      {:ex_doc, "~> 0.6.0", only: :dev} ]
   end
 
   defp description do
